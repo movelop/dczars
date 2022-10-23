@@ -1,0 +1,162 @@
+.confirmation {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.confirmationContainer {
+    width: 100%;
+    max-width: 1380px;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.confirmationContainer > h1 {
+    font-size: 32px;
+}
+
+.confirm {
+    width: 80%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #c3d6f8;
+    gap: 10px;
+}
+
+.confirm > h1 {
+    font-size: 22px;
+}
+
+.confirmButton {
+    margin-top: 1rem;
+}
+
+.cButton {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    gap: 10px;
+}
+
+@media screen and (min-width: 2000px) {
+    .confirmationContainer {
+        max-width: 1980px;
+    }
+
+    .confirmationContainer > h1 {
+        font-size: 48px;
+    }
+
+    .confirm {
+        height: 500px;
+    }
+
+    .confirm > h1 {
+        font-size: 38px;
+    }
+
+    .cButton {
+        font-size: 32px;
+        width: 200px;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 1550px) {
+    .confirmationContainer {
+        max-width: 1024px;
+    }
+
+    .confirmationContainer > h1 {
+        font-size: 30px;
+    }
+
+    .confirm > h1 {
+        font-size: 20px;
+    }
+
+    .cButton {
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .confirmationContainer {
+        max-width: 850px;
+    }
+
+    .confirmationContainer > h1 {
+        font-size: 28px;
+    }
+
+    .confirm {
+        width: 70%;
+    }
+
+    .confirm > h1 {
+        font-size: 18px;
+    }
+
+    .cButton {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 850px){
+   .confirmationContainer {
+        width: 90%;
+   } 
+
+   .confirm {
+        width: 80%;
+   }
+}
+
+@media screen and (max-width: 550px) {
+    .confirm {
+        width: 90%;
+        height: 200px;
+    }
+
+    .cButton {
+        width: 90px;
+    }
+}
+
+@media screen and (max-width:385px) {
+    .confirmationContainer > h1 {
+        font-size: 22px;
+    }
+
+    .confirm {
+        width: 100%;
+    }
+
+    .confirm > h1 {
+        font-size: 14px;
+    }
+}
+
+@media print {
+    .small,
+    .testimonials,
+    .footer {
+        display: none;
+    }
+}
+

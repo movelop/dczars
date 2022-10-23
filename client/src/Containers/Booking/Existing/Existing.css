@@ -1,0 +1,232 @@
+.existing {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.existingContainer {
+    width: 100%;
+    max-width: 1380px;
+
+}
+
+.found {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.foundCard {
+    width: 100%;
+    max-width: 1024px;
+    text-align: center;
+    margin: 2rem auto 0 auto;
+    padding: 2rem;
+    background-color: #c3d6f8;
+    color: var(--primary-color);
+}
+
+.foundInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.foundInfo > div {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    padding: 1rem 0;
+}
+
+.actions {
+    margin-top: 1rem;
+}
+
+.deleteButton {
+    color: red;
+    outline: none;
+    border: none;
+    padding: 8px 10px;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.notExisting {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 50vh;
+    width: 100%;
+    align-items: center;
+    gap: 3rem;
+}
+
+.notExisting h1 {
+    font-size: 32px;
+    color: var(--primary-color);
+}
+
+.notExistingButton {
+    border: none;
+    background-color: var(--gold-color);
+    color: var(--white-color);
+    padding: 1em 2em;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 2000px) {
+    .existing {
+        margin-top: 4rem;
+    }
+
+    .existingContainer {
+        max-width: 1980px;
+    }
+
+    .foundCard {
+        max-width: 1580px;
+    }
+
+    .foundInfo > h1 {
+        font-size: 38px;
+    }
+
+    .foundInfo > div {
+        width: 60%;
+        padding: 2rem 0;
+    }
+
+    .foundInfo > div > h3 {
+        font-size: 32px;
+    } 
+
+    .actions {
+        margin-top: 2rem;
+    }
+
+    .deleteButton {
+        font-size: 32px;
+    }
+
+    .notExisting h1 {
+        font-size: 48px;
+    }
+
+    .notExistingButton {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width: 1550px) {
+    .existingContainer {
+        max-width: 1024px;
+    }
+
+    .foundCard {
+        max-width: 900px;
+    }
+
+    .foundInfo > h1 {
+        font-size: 16px;
+    }
+
+    .foundInfo > div > h3 {
+        font-size: 14px;
+    }  
+
+    .notExisting h1 {
+        font-size: 30px;
+    }
+
+    .notExistingButton {
+        padding: 0.75em 1.5em;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .existingContainer {
+        max-width: 850px;
+    }
+
+    .foundCard {
+        max-width: 780px;
+    }
+
+    .foundInfo > div {
+        width: 50%;
+    }
+
+    .notExisting h1 {
+        font-size: 28px;
+    }
+
+    .notExistingButton {
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 850px) {
+    .existingContainer {
+        width: 90%;
+    }
+
+    .foundInfo > div {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .foundInfo h1 {
+        font-size: 14px;
+    }
+
+    .foundInfo > div {
+        width: 95%;
+    }
+
+    .foundInfo > div > h3 {
+        font-size: 12px;
+    }
+
+    .deleteButton {
+        font-size: 12px;
+    }
+
+    .notExisting {
+        min-height: 40vh;
+    }
+
+    .notExisting h1 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .foundInfo > div {
+        width: 100%;
+    }
+
+    .foundInfo > div > h3 {
+        font-size: 10px;
+    }
+
+    .deleteButton {
+        font-size: 10px;
+    }
+
+    .notExisting h1 {
+        font-size: 18px;
+    }
+
+    .notExistingButton {
+        font-size: 12px;
+        padding: 0.5em 1em;
+    }
+}
