@@ -23,17 +23,25 @@
 
 .confirm {
     width: 80%;
-    height: 300px;
+    /* height: 300px; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #c3d6f8;
     gap: 10px;
+    padding: 2rem;
 }
 
 .confirm > h1 {
     font-size: 22px;
+}
+
+.confirm > .confirmDetail {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding: 1rem 0;
 }
 
 .confirmButton {
@@ -62,12 +70,17 @@
         font-size: 48px;
     }
 
-    .confirm {
-        height: 500px;
-    }
-
     .confirm > h1 {
         font-size: 38px;
+    }
+
+    .confirm > .confirmDetail {
+        width: 60%;
+        padding: 2rem 0;
+    }
+
+    .confirm > .confirmDetail h3 {
+        font-size: 32px;
     }
 
     .cButton {
@@ -88,6 +101,10 @@
 
     .confirm > h1 {
         font-size: 20px;
+    }
+
+    .confirm > .confirmDetail h3 {
+        font-size: 14px;
     }
 
     .cButton {
@@ -112,6 +129,10 @@
         font-size: 18px;
     }
 
+    .confirm > .confirmDetail {
+        width: 60%;
+    }
+
     .cButton {
         width: 100px;
     }
@@ -122,6 +143,10 @@
         width: 90%;
    } 
 
+   .confirm > .confirmDetail {
+        width: 65%;
+    }
+
    .confirm {
         width: 80%;
    }
@@ -130,7 +155,14 @@
 @media screen and (max-width: 550px) {
     .confirm {
         width: 90%;
-        height: 200px;
+    }
+
+    .confirm > .confirmDetail {
+        width: 95%;
+    }
+
+    .confirm > .confirmDetail h3 {
+        font-size: 12px;
     }
 
     .cButton {
@@ -145,6 +177,10 @@
 
     .confirm {
         width: 100%;
+    }
+
+    .confirm > .confirmDetail h3 {
+        font-size: 10px;
     }
 
     .confirm > h1 {

@@ -46,6 +46,14 @@
     letter-spacing: 0.6em;
 }
 
+.addressPlace > div {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+
 .addressPlaceInfo {
     display: flex;
     gap: 5px;
@@ -53,11 +61,15 @@
     margin-bottom: 5px;
 }
 
-.addressPlace p, span {
+.addressPlace p {
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 16px;
 
+}
+
+.addressPlace span {
+    font-size: 14px;
 }
 
 .flinks, .slinks {
@@ -173,8 +185,12 @@ li {
         font-weight: 500;
     }
 
-    .addressPlace  p, span {
-        font-size: 12px;
+    .addressPlace  p {
+        font-size: 14px;
+    }
+
+    .addressPlace span {
+        font-size: 13px;
     }
 
     li, .social {
@@ -194,10 +210,6 @@ li {
 
     .addressHotel p {
         font-weight: 400;
-    }
-
-    .addressPlace  p, span {
-        font-size: 10px;
     }
 
     li, .social {
@@ -233,7 +245,7 @@ li {
     .footerContainer {
         max-width: 100%;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
         align-items: flex-start;
         text-align: center;
     }
@@ -242,6 +254,7 @@ li {
         gap: 0.5rem;
         display: flex;
         align-items: center;
+        gap: 1.5rem;
     }
 
     .addressHotel  h1 {
@@ -250,10 +263,14 @@ li {
 
     .addressHotel p {
         font-weight: 400;
-        font-size: 12px;
+        font-size: 13px;
     }
 
-    .addressPlace  p, 
+    .addressPlace  p {
+        font-size: 13px;
+        text-align: left;
+    } 
+
     .addressPlace span {
         font-size: 12px;
         text-align: left;

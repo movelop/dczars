@@ -21,6 +21,44 @@ const Confirmation = () => {
               <div className="confirm">
                 <h1>Your confirmation code is:</h1>
                 <h1>{confirmation.confirmation}</h1>
+                <div className='confirmDetail'>
+                  <h3>Room:</h3>
+                  <h3>{confirmation.roomNumbers.length >1 ? confirmation.roomNumbers.map((roomNumber) => `${roomNumber}, `): confirmation.roomNumbers.map((roomNumber) => `${roomNumber}`)}</h3>
+                </div>
+                <div className='confirmDetail'>
+                  <h3>Name:</h3>
+                  <h3>
+                    {`${confirmation.firstname} ${confirmation.lastname}`}
+                  </h3>
+                </div>
+                <div className='confirmDetail'>
+                  <h3>Email:</h3>
+                  <h3>{confirmation.email}</h3>
+                </div>
+                <div className='confirmDetail'>
+                  <h3>Phone:</h3>
+                  <h3>{confirmation.phone}</h3>
+                </div>
+                <div className='confirmDetail'>
+                  <h3>Check-in Date:</h3>
+                  <h3>
+                    {new Date(confirmation.startDate).toLocaleString("en-uk", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}
+                  </h3>
+                </div>
+                <div className='confirmDetail'>
+                  <h3>Check-out Date:</h3>
+                  <h3>
+                    {new Date(confirmation.endDate).toLocaleString("en-uk", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}
+                  </h3>
+                </div>
                 <div className="confirmButton">
                   <button className="cButton" onClick={() => window.print()}>
                     <BsPrinterFill /> Print

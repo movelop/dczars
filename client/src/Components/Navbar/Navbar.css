@@ -10,7 +10,7 @@
 }
 
 .colorChange {
-    background: rgba(20, 39, 74, 0.99);
+    background-color: var(--primary-color);
 }
 
 .navbarContainer {

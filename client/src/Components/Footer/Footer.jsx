@@ -19,7 +19,15 @@ const Footer = () => {
                 </div>
                 <div className="addressPlace">
                     <p className='addressPlaceInfo'><HiLocationMarker className='svg'/> D'Czars Bus Stop, Ilo Awela Road, Toll Gate, Ota, Ogun State.</p>
-                    <span className='addressPlaceInfo'><BsPhoneFill/> +234 805 789 1111</span>
+                    <div className='contact'>
+                        <p><BsPhoneFill/> Front Desk</p>
+                        <span >+234 803 988 6484</span>
+                    </div>
+                    <div className='contact'>
+                        <p><BsPhoneFill/> Director</p>
+                        <span>+234 805 789 1111</span>
+                        <span>+234 803 318 6481</span>
+                    </div>
                     <p className='addressPlaceInfo'> <AiFillMail/> dczarshotel@yahoo.com</p>
                 </div>
             </div>
