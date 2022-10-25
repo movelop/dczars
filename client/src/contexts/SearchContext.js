@@ -5,7 +5,7 @@ const newEndDate = new Date().getTime() + 86400000;
 const INITIAL_STATE = {
     dates: initialDate ? [
         {
-            startDate: new Date(initialDate[0]?.startDate) > newDate ? new Date(initialDate[0]?.startDate): newDate ,
+            startDate: new Date(initialDate[0]?.startDate) > newDate ? new Date(initialDate[0]?.startDate) : newDate ,
             endDate: new Date(initialDate[0]?.endDate) ,
             key: 'selection'
         }

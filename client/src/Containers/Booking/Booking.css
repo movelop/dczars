@@ -206,12 +206,12 @@
     .checkReservationForm input {
         flex-basis: 100%;
         width: 86%;
+        margin-right: 0;
     }
 
     .bookingButton {
         flex-basis: 100%;
         width: 90%;
-        margin: 0;
     }
 }
 

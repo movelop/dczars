@@ -42,7 +42,7 @@ const Booking = () => {
       <div className="booking">
         <div className="checkReservation">
           <h1>Already have a Booking?</h1>
-          <div className='checkReservationForm'>
+          <form className='checkReservationForm'>
             <input
               maxLength="12"
               name="confirmation"
@@ -61,7 +61,7 @@ const Booking = () => {
             <button onClick={handleSubmit} className="bookingButton">
               Lookup
             </button>
-          </div>
+          </form>
           <span className="disclaimer">
             * expired bookings will automatically be deleted
           </span>
