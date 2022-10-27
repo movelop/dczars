@@ -4,6 +4,7 @@ import { AiFillMail } from 'react-icons/ai';
 import { BsTwitter, BsInstagram, BsPhoneFill } from 'react-icons/bs';
 import { FaFacebookF } from 'react-icons/fa';
 import { HiLocationMarker } from 'react-icons/hi';
+import { GiRotaryPhone } from 'react-icons/gi';
 
 
 import './Footer.css';
@@ -20,7 +21,7 @@ const Footer = () => {
                 <div className="addressPlace">
                     <p className='addressPlaceInfo'><HiLocationMarker className='svg'/> D'Czars Bus Stop, Ilo Awela Road, Toll Gate, Ota, Ogun State.</p>
                     <div className='contact'>
-                        <p><BsPhoneFill/> Front Desk</p>
+                        <p><GiRotaryPhone/> Front Desk</p>
                         <span >+234 803 988 6484</span>
                     </div>
                     <div className='contact'>
