@@ -34,12 +34,16 @@ const Confirmation = () => {
                 <div className='confirmDetail'>
                   <h3>Name:</h3>
                   <h3>
-                    {`${confirmation.firstname} ${confirmation.lastname}`}
+                    {`${confirmation.lastname} ${confirmation.firstname}`}
                   </h3>
                 </div>
                 <div className='confirmDetail'>
                   <h3>Email:</h3>
                   <h3>{confirmation.email}</h3>
+                </div>
+                <div className="confirmDetail">
+                  <h3>Payment Reference</h3>
+                  <h3>{confirmation.paymentReference ? confirmation.paymentReference : 'Cash'}</h3>
                 </div>
                 <div className='confirmDetail'>
                   <h3>Phone:</h3>

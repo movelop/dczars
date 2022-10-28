@@ -37,6 +37,31 @@
     font-size: 22px;
 }
 
+.foundLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logoImage {
+    width: 180px;
+    height: 180px;
+    margin: -40px 0;
+}
+
+.logoImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.foundLogo h6 {
+    font-family: var(--font-heading);
+    text-transform: capitalize;
+    font-size: 24px;
+}
+
 .confirm > .confirmDetail {
     display: flex;
     justify-content: space-between;
@@ -71,6 +96,16 @@
     }
 
     .confirm > h1 {
+        font-size: 38px;
+    }
+
+    .logoImage {
+        width: 290px;
+        height: 290px;
+        margin: -70px 0;
+    }
+
+    .foundLogo h6 {
         font-size: 38px;
     }
 
@@ -155,6 +190,16 @@
 @media screen and (max-width: 550px) {
     .confirm {
         width: 90%;
+    }
+
+    .logoImage {
+        width: 140px;
+        height: 140px;
+        margin: -30px 0;
+    } 
+
+    .foundLogo h6 {
+        font-size: 17px;
     }
 
     .confirm > .confirmDetail {

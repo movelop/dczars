@@ -10,6 +10,7 @@ const Existing = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { data } = location.state;
+  const presentDay = new Date();
 
   const handleDelete = async (info) => {
       const {startDate, endDate, selectedRooms, _id} = info;
@@ -72,6 +73,10 @@ const Existing = () => {
                     <h3>{info.roomNumbers.length >1 ? info.roomNumbers.map((roomNumber) => `${roomNumber}, `): info.roomNumbers.map((roomNumber) => `${roomNumber}`)}</h3>
                   </div>
                   <div>
+                    <h3>Payment Reference</h3>
+                    <h3>{info.paymentReference ? info.paymentReference : 'Cash'}</h3>
+                  </div>
+                  <div>
                     <h3>Name:</h3>
                     <h3>
                       {`${info.firstname} ${info.lastname}`}
@@ -106,14 +111,14 @@ const Existing = () => {
                     </h3>
                   </div>
                 </div>
-                <div className="actions">
+                {presentDay < new Date(info.startDate) && <div className="actions">
                   <button
                     className="deleteButton"
                     onClick={() => handleDelete(info)}
                   >
                     Cancel Reservation
                   </button>
-                </div>
+                </div>}
               </div>
             </div>
             ))

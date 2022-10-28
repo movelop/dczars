@@ -94,20 +94,26 @@ export const getBooking = async(req, res, next) => {
     try {
         // 
         let existingBooking;
+        let notChecked = [];
         const { email, confirmation } = req.body;
 
         if(confirmation?.length > 0 ){
             existingBooking = await Booking.find({
                 confirmation: confirmation.toUpperCase(),
-            });
+            }).sort({ startDate: -1 });
         } else if (email?.length > 0) {
-            existingBooking = await Booking.find({ email: email });
+            existingBooking = await Booking.find({ email: email }).sort({ startDate: -1 });
         } else {
             return next( createError(400, 'Please enter a valid email address or confimation code') );
         }
 
         if (existingBooking.length) {
-            return res.status(200).json(existingBooking);
+            existingBooking.map((exists) => {
+                if (new Date(exists.startDate) > new Date()) {
+                  return  notChecked = [...notChecked, exists]
+                }
+            })
+            return res.status(200).json(notChecked);
         } else {
             return next(createError(404, 'Not found'));
         }
