@@ -19,6 +19,12 @@ const Confirmation = () => {
             <>
               <h1>Thank You!</h1>
               <div className="confirm">
+                <div className="foundLogo">
+                  <div className="logoImage">
+                    <img src={images.logo} alt="logo" />
+                  </div>
+                  <h6>D'CZARS HOTEL AND SUITES</h6>
+                </div>
                 <h1>Your confirmation code is:</h1>
                 <h1>{confirmation.confirmation}</h1>
                 <div className='confirmDetail'>

@@ -8,7 +8,8 @@ import lobby from '../Assets/lobby.jpg';
 import existing from '../Assets/existing.jpg';         
 import checkout from '../Assets/checkout.jpg';         
 import confirm from '../Assets/confirm.jpg';  
-import room from '../Assets/room.jpg';        
+import room from '../Assets/room.jpg';     
+import logo from '../Assets/logo.png';    
 
 export const navData = [
     {
@@ -37,5 +38,6 @@ export const images = {
     checkout,
     confirm,
     room,
+    logo,
 }
 

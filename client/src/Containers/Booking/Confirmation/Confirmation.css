@@ -191,8 +191,17 @@
 @media print {
     .small,
     .testimonials,
-    .footer {
+    .footer,
+    .confirmationContainer > h1 {
         display: none;
+    }
+
+    .confirm {
+        width: 80%;
+    }
+
+    .confirm > .confirmDetail {
+        width: 90%;
     }
 }
 

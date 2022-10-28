@@ -58,6 +58,12 @@ const Existing = () => {
             data.map((info) => (
               <div className="found" key={info._id}>
               <div className="foundCard">
+                <div className="foundLogo">
+                  <div className="logoImage">
+                    <img src={images.logo} alt="logo" />
+                  </div>
+                  <h6>D'CZARS HOTEL AND SUITES</h6>
+                </div>
                 <div className="foundInfo">
                   <h1>Confirmation Number:</h1>
                   <h1>{info.confirmation}</h1>
