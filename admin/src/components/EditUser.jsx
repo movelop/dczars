@@ -95,7 +95,11 @@ const EditUser = ({ item, setEdit }) => {
       }
     } else {
       try {
-        axiosInst.put(`/api/users/${item._id}`, info);
+        const newUser = {
+          ...info,
+          isAdmin
+        }
+        axiosInst.put(`/api/users/${item._id}`, newUser);
         navigate(`/users`);
       } catch (error) {
         console.log(error);
@@ -153,7 +157,7 @@ const EditUser = ({ item, setEdit }) => {
                     control={
                       <Checkbox
                         checked = {isAdmin}
-                        onChange={handleSelect }
+                        onChange={(handleSelect) }
                       />
                     }
                   />

@@ -29,7 +29,7 @@ const NewRoom = () => {
 
   const handleAddRoom = () => {
     if(room !== ''){
-      setRooms([...rooms, { number: room }])
+      setRooms([...rooms, room])
     }
     setRoom('');
   };
@@ -109,8 +109,8 @@ const NewRoom = () => {
               <div className='lg:w-[45%] w-full mt-4 mb-8 items-center'>
                 <label>Rooms</label>
                   <div className='flex gap-1 my-3'>
-                    {rooms.length > 0 && rooms.map((chip) => (
-                      <Chip  key={chip.number} label={chip.number} onDelete={() => setRooms(rooms.filter((c) => c.number !== chip.number))} size='small' />
+                    {rooms.length > 0 && rooms.map((chip, i) => (
+                      <Chip  key={chip + i} label={chip} onDelete={() => setRooms(rooms.filter((c) => c !== chip))} size='small' />
                     ))}
                   </div>
                   <TextField

@@ -71,7 +71,7 @@ const Navbar = () => {
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick('userProfile')}
           >
-            <img src={user.img || avatar} alt="user-profile" className='rounded-full h-8 w-8' />
+            <img src={user.img || avatar} alt="user-profile" className='rounded-full h-8 w-8 object-cover' />
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14 capitalize">
