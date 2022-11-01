@@ -213,5 +213,10 @@
         flex-basis: 100%;
         width: 90%;
     }
+
+    .disclaimer {
+        font-size: 12px;
+        text-align: center;
+    }
 }
 
