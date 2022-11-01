@@ -31,7 +31,7 @@ const Existing = () => {
     };
 
     const alldates = getDatesInRange(startDate, endDate);
-
+    const cancelledBooking = {...info, cancelled:true}
     try {
       await Promise.all(
           selectedRooms.map((roomId) => {
@@ -42,7 +42,7 @@ const Existing = () => {
             return res.data;
           })
       );
-      await axios.delete(`/api/bookings/${_id}`);
+      await axios.put(`/api/bookings/${_id}`, cancelledBooking);
       navigate('/');
   } catch (error) {
       console.log(error);
@@ -119,6 +119,7 @@ const Existing = () => {
                     Cancel Reservation
                   </button>
                 </div>}
+                <span className='caution'>Please contact the front desk for cancelled reservations!</span>
               </div>
             </div>
             ))

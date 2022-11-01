@@ -103,6 +103,10 @@ const SingleDetails = ({ type, data, img }) => {
                         <span className="font-[300]">{data.email}</span>
                     </div>
                     <div className="mb-[10px] md:text-lg">
+                        <span className="font-bold mr-2">Cancelled:</span>
+                        <span className="font-[300]">{data.cancelled ? 'Yes' : 'No'}</span>
+                    </div>
+                    <div className="mb-[10px] md:text-lg">
                         <span className="font-bold mr-2">Phone Number:</span>
                         <span className="font-[300]">{data.phone}</span>
                     </div>

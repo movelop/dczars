@@ -38,14 +38,6 @@
     font-size: 18px;
     color: #008009;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-}
-
-.singleRoomHighlight > span {
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
 }
 
 .singleRoomImages {
@@ -147,10 +139,6 @@
 
     .singleRoomHighlight {
         font-size: 28px;
-    }
-
-    .singleRoomHighlight > span {
-        margin-left: 10px;
     }
 
     .singleRoomImgWrapper {
@@ -266,10 +254,6 @@
     }
 
     .singleRoomHighlight {
-        font-size: 11px;
-    }
-
-    .singleRoomHighlight > span {
         font-size: 12px;
     }
 
@@ -286,13 +270,9 @@
     }
 }
 
-@media screen and (max-width:300px) {
+@media screen and (max-width:385px) {
     .singleRoomHighlight {
-        font-size: 8px;
-    }
-
-    .singleRoomHighlight  span {
-        font-size: 10px;
-        margin-left: 2px;
+        font-size: 11px;
+        margin-bottom: 10px;
     }
 }

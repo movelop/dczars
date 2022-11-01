@@ -62,6 +62,15 @@ export const createBooking = async (req, res, next) => {
     }
 };
 
+export const cancelBooking = async (req, res, next) => {
+    try {
+        const cancelled = await Booking.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true });
+        res.status(200).json(cancelled);
+    } catch (error) {
+        next(error);
+    }
+};
+
 export const deleteBooking = async(req, res, next) => {
     try {
         await Booking.findByIdAndDelete(req.params.id);
@@ -109,7 +118,7 @@ export const getBooking = async(req, res, next) => {
 
         if (existingBooking.length) {
             existingBooking.map((exists) => {
-                if (new Date(exists.startDate) > new Date()) {
+                if (new Date(exists.startDate) > new Date() && !exists.cancelled) {
                   return  notChecked = [...notChecked, exists]
                 }
             })

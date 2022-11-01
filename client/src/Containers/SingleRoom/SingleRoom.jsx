@@ -19,7 +19,7 @@ const SingleRoom = () => {
           <button className="bookNow" onClick={() => navigate('/booking')}>Reserve or Book Now!</button>
           <h1 className="singleRoomTitle">{data.title}</h1>
           <p className="singleRoomHighlight">
-              Book a stay over <span><TbCurrencyNaira className='currency' /></span> {data.price} at this property and get access to
+              Book a stay over ₦{data.price.toLocaleString('en-us')} at this property and get access to
               free WIFI
 		  </p>
           <div className="singleRoomImages">
@@ -45,7 +45,7 @@ const SingleRoom = () => {
                   all exterior with furnished balcony.
                 </span>
                 <h2>
-                  <b><span><TbCurrencyNaira className='currency' /></span>{data.price}</b> per Night
+                  <b><span><TbCurrencyNaira className='currency' /></span>{data.price.toLocaleString('en-us')}</b> per Night
                 </h2>
                 <Link to='/booking'>
                   <button >Reserve or Book Now!</button>

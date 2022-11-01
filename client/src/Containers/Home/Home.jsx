@@ -46,6 +46,9 @@ const Home = () => {
                     The hotel is a 35 minutes drive from Murtala Mohammed International Airport. 
                     The restaurant serves local and continental dishes. The bar serves a variety of alcoholic and non alcoholic 
                     drinks which can be enjoyed in the lounge. Guests may also dine outdoors by the balcony overlooking the pool.
+                    Guests must contact the property in advance for check-in instructions; front desk staff will greet guests on arrival
+                    To make arrangements for check-in please contact the property ahead of time using the information on the booking confirmation
+                    If you are planning to arrive after 10 PM please contact the property in advance using the information on the booking confirmationContainer.
                   </p>
                   <Link to="/facilities">
                     <button className='exploreButton'>Explore</button>

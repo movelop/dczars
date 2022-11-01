@@ -57,6 +57,10 @@ const BookingSchema = new mongoose.Schema({
     confirmation: {
         type: String,
         required: true,
+    },
+    cancelled: {
+        type: Boolean,
+        default: false,
     }
 }, { timestamps: true });
 
