@@ -82,6 +82,12 @@
     margin-bottom: 10px;
 }
 
+.existingCaution {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .caution {
     font-size: 12px;
     color: #5676b1;
@@ -259,7 +265,7 @@
     }
 
     .caution {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .notExisting {

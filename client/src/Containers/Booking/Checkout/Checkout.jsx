@@ -26,7 +26,7 @@ const Checkout = () => {
     });
     const location = useLocation();
     const navigate = useNavigate();
-    const { dates, options, days, totalPrice, room } = location.state;
+    const { dates, options, days, totalPrice, reservationPrice, room } = location.state;
     const getDatesInRange = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -120,7 +120,7 @@ const Checkout = () => {
             numberOfRooms: options.rooms,
             selectedRooms: selectedRooms,
             roomNumbers: selectedRoomNumbers,
-            price: totalPrice,
+            price: reservationPrice,
             paymentReference: reference,
         }
         setLoading(true);
@@ -299,7 +299,7 @@ const Checkout = () => {
                                 </div>
                             </form>
                             <div className="guestFormButton">
-                                    {pay ? <PaystackButton {...componentProps} className='pay' /> : <button onClick={handleSubmit}>Continue to Pay</button>}
+                                    {pay ? <PaystackButton {...componentProps} className='pay' /> : <button className='continue' onClick={handleSubmit}>Continue to Pay</button>}
                             </div>
                         </div>
                     </>

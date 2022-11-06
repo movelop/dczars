@@ -71,7 +71,7 @@ const BookingTable = ({ columns }) => {
                         </Link>
                         <div
                             className="py-1 px-2 text-red-700 border-1 border-dotted border-red-800 cursor-pointer"
-                            onClick={() => handleDelete(params.row._id)}
+                            onClick={() => handleDelete(params.row)}
                         >
                             Delete
                         </div>

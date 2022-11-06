@@ -5,7 +5,7 @@ import { createError } from './error.js';
 
 export const verifyToken = (req, res, next) => {
     const authHeader = req.headers.token;
-    const token = authHeader.split(' ')[1];
+    const token = authHeader?.split(' ')[1];
     if(!authHeader) {
         return next(createError(401, "You are not allowed to access this page(no token) "));
     };

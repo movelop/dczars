@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     dates: initialDate ? [
         {
             startDate: new Date(initialDate[0]?.startDate) > newDate ? new Date(initialDate[0]?.startDate) : newDate ,
-            endDate: new Date(initialDate[0]?.endDate) ,
+            endDate: new Date(initialDate[0]?.endDate) > newDate ? new Date(initialDate[0]?.endDate) : newEndDate,
             key: 'selection'
         }
     ] : [

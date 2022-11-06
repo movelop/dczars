@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState} from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 import { TbCurrencyNaira } from 'react-icons/tb';
+import { AiOutlineWarning } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 import './Availability.css';
@@ -61,10 +62,11 @@ const Availability = ({ room }) => {
     }
 
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
-  const totalPrice = days* options.rooms * room.price
+  const reservationPrice = days * options.rooms * room.price;
+  const totalPrice = (days* options.rooms * room.price) + 5000
 
   const handleBooking = (room) => {
-    navigate('/booking/checkout', { state: { dates, options, days, totalPrice, room } });
+    navigate('/booking/checkout', { state: { dates, options, days,reservationPrice, totalPrice, room } });
   }
 
 
@@ -76,9 +78,9 @@ const Availability = ({ room }) => {
                     <img src={room.images[0]} alt="room" />
                 </div>
                 <div className="availabilityCardInfo">
-                    <h2>{room.title}</h2>
+                    <h2>{room.title} <span className='mobi'>(₦{room.price.toLocaleString("en-US")})</span></h2>
                     <span className="location">
-                        <HiLocationMarker /> Heritage Resort, Ota
+                        <HiLocationMarker /> D'Czars Hotel and suites, Ota
                     </span>
                     <div className="details">
                         <div>
@@ -98,14 +100,22 @@ const Availability = ({ room }) => {
                             <p>{availableRooms.length}</p>
                         </div>
                     </div>
+                    <div className="alert">
+                        <AiOutlineWarning /> 
+                        <span>All resrevation include ₦5,000 refundable caution fee!</span>
+                    </div>
                 </div>
                 <div className="availabilityCardPrice">
-                    <div>
+                    <div className='daily'>
                         <label>Daily Price</label>
-                        <h4><span><TbCurrencyNaira /></span>{room.price.toLocaleString("en-US")}</h4>
+                        <h6><span><TbCurrencyNaira /></span>{room.price.toLocaleString("en-US")}</h6>
                     </div>
                     <div>
-                        <label>Total ({`${days} Night(s) for ${options.rooms} room(s)`})</label>
+                        <label>{`${days} Night(s) for ${options.rooms} room(s)`}</label>
+                        <h6><span><TbCurrencyNaira /></span>{reservationPrice.toLocaleString("en-US")}</h6>
+                    </div>
+                    <div className='total'>
+                        <label>Total</label>
                         <h4 className='last'><span><TbCurrencyNaira /></span>{totalPrice.toLocaleString("en-US")}</h4>
                     </div>
                     {availableRooms.length > 0 ? (

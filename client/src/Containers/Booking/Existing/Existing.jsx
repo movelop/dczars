@@ -9,8 +9,9 @@ import axios from '../../../hooks/api';
 const Existing = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { data } = location.state;
+  const data  = location.state?.data;
   const presentDay = new Date();
+  
 
   const handleDelete = async (info) => {
       const {startDate, endDate, selectedRooms, _id} = info;
@@ -119,7 +120,12 @@ const Existing = () => {
                     Cancel Reservation
                   </button>
                 </div>}
-                <span className='caution'>Please contact the front desk for cancelled reservations!</span>
+                <div className='existingCaution'>
+                  <span className='caution'>Please contact the front desk for cancelled reservations!</span>
+                  <span className='caution'>Confirmed reservation with "Non arrival of guest"
+                    will be forfieted if not cancelled 24hrs prior to arrival
+                  </span>
+                </div>
               </div>
             </div>
             ))
