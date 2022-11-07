@@ -23,11 +23,14 @@ const Footer = () => {
                     <div className='contact'>
                         <p><GiRotaryPhone/> Front Desk</p>
                         <span >+234 803 988 6484</span>
+                        <span>+234 816 749 5769</span>
+                        <span>+234 814 026 6486</span>
                     </div>
                     <div className='contact'>
                         <p><BsPhoneFill/> Director</p>
                         <span>+234 805 789 1111</span>
                         <span>+234 803 318 6481</span>
+                        <span> <AiFillMail/> kasimjs@yahoo.co.uk</span>
                     </div>
                     <p className='addressPlaceInfo'> <AiFillMail/> dczarshotel@yahoo.com</p>
                 </div>
