@@ -38,7 +38,7 @@ const EditRoom = ({ item, setEdit }) => {
       id: "price",
       label: "Price",
       type: "number",
-      placeholder: `N${info.price}`,
+      placeholder: info.price,
     },
 
     {
