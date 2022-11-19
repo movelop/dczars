@@ -24,7 +24,7 @@ const Home = () => {
                   <p>The rooms at D’Czars Hotel are quite spacious and come with great services and 
                     facilities such as luxurious beds, wardrobe, flat-screen television sets with access to cable channels,
                     free wireless internet access, en-suite bathrooms with stand-in showers and complimentary toiletries, 
-                    telephone luggage storage, tables and armchairs, refrigerators plus in-room sofas.
+                    telephone, luggage storage, tables and armchairs, refrigerators plus in-room sofas.
                   </p>
                   <Link to="/rooms">
                     <button className='exploreButton'>Explore</button>
