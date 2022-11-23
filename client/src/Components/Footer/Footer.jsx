@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AiFillMail } from 'react-icons/ai';
-import { BsTwitter, BsInstagram, BsPhoneFill } from 'react-icons/bs';
+import { BsPhoneFill } from 'react-icons/bs';
 import { FaFacebookF } from 'react-icons/fa';
 import { HiLocationMarker } from 'react-icons/hi';
 import { GiRotaryPhone } from 'react-icons/gi';
@@ -36,30 +36,22 @@ const Footer = () => {
                 </div>
             </div>
             <ul className="flinks">
-                <Link to='/'>
-                    <li>About us</li>
+                <Link to='/facilities'>
+                    <li>Facilities</li>
                 </Link>
                 <Link to='/contact'>
                     <li>Contact us</li>
                 </Link>
-                <Link to='/'>
-                    <li>Terms&conditions</li>
+                <Link to='/rooms'>
+                    <li>Rooms</li>
                 </Link>
                 
             </ul>
             <div className="slinks">
-                <NavLink to="/" className='social'>
+                <a href="https://web.facebook.com/profile.php?id=100072629864480" target='_blank' rel='noreferrer' className='social'>
                     <FaFacebookF />
                     Facebook
-                </NavLink>
-                <NavLink to="/" className='social'>
-                    <BsTwitter />
-                    Twitter
-                </NavLink>
-                <NavLink to="/" className='social'>
-                    <BsInstagram />
-                    Instagram
-                </NavLink>
+                </a>
             </div>
             <div className="newsletter">
                 <p>Subscribe to our newsletter</p>
