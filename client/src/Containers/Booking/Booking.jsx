@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useFetch from '../../hooks/useFetch';
@@ -15,6 +15,10 @@ const Booking = () => {
   const [error, setError] = useState('');
   const { data, loading } = useFetch('/api/rooms');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "D'CZARS HOTEL & SUITES||BOOKING";
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

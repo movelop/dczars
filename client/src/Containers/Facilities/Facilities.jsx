@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Heading, Testimonials, Footer, Header, Loading } from '../../Components';
 import { images } from '../../Data/dummy';
@@ -22,6 +22,9 @@ const Facility = ({ item }) => (
 
 const Facilities = () => {
   const { data, loading } = useFetch('/api/facilities')
+  useEffect(() => {
+    document.title = "D'CZARS HOTEL AND SUITES||FACILITIES";
+  }, []);
   return (
     <div>
         <Heading img = {images.facilitiesImg} />

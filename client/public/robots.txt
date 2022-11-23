@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /booking/checkout
+Disallow: /booking/existing
+Sitemap: https://dczars.com/sitemap.xml 

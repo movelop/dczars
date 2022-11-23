@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { HeadingSmall, Footer } from '../../Components';
 import { images } from '../../Data/dummy';
 import './Contact.css';
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = "D'CZARS HOTEL AND SUITES||CONTACT-US";
+  }, []);
   return (
     <div>
         <HeadingSmall text={'CONTACT-US'} img={images.queen}/>
