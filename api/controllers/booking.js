@@ -20,25 +20,20 @@ export const createBooking = async (req, res, next) => {
         roomNumbers,
         price,
         paymentReference,
+        identity,
     } = data;
     try {
-        // generate unique booking id
         let bookingId = generateId(12);
-
-        // check if ID already exists
-        // first get all ID's and store them in an array
         const idArr = [];
         const allBookings = await Booking.find();
 
         allBookings.map((info) => {
             idArr.push(info.confirmation);
         });
-        // then use a while loop, as long as the new ID matches an item in the array, create a new one
         while (idArr.includes(bookingId)) {
             bookingId = generateId(12);
         }
 
-        // create a new booking in the MongoDB DB
         const result = await Booking.create({
             firstname,
             lastname,
@@ -54,6 +49,7 @@ export const createBooking = async (req, res, next) => {
             roomNumbers,
             price,
             paymentReference,
+            identity,
             confirmation: bookingId,
         })
         res.status(200).json(result);

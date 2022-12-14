@@ -23,6 +23,7 @@ const Checkout = () => {
         email: "",
         confirmEmail: "",
         phone: "",
+        identity: "",
     });
     const location = useLocation();
     const navigate = useNavigate();
@@ -277,6 +278,17 @@ const Checkout = () => {
                                         required
                                         className='guestDetailsInput'
                                         name='phone'
+                                    />
+                                </div>
+                                <div className="guestFormInput">
+                                    <label>Identification</label>
+                                    <input 
+                                        type="text"
+                                        onChange={handleChange}
+                                        required
+                                        className='guestDetailsInput'
+                                        name='identity'
+                                        placeholder='ID number(NIN, Passport Number, etc.)'
                                     />
                                 </div>
                                 <div className="selectRoomContainer">

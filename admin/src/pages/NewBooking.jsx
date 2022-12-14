@@ -398,7 +398,6 @@ const NewBooking = () => {
                   onChange={handleChange}
                   className="w-full"
                   placeholder={input.placeholder}
-                  // value={input.placeholder}
                   label={input.label}
                   variant="outlined"
                   id={input.id}
@@ -406,6 +405,17 @@ const NewBooking = () => {
                 />
               </div>
               ))} 
+              <div className="lg:w-[45%] w-full mt-4 mb-4 md:mt-2 md:mb-2">
+              <TextField
+                  onChange={handleChange}
+                  className="w-full"
+                  placeholder='ID number(NIN, Passport Number, etc.)'
+                  label='Identification'
+                  variant="outlined"
+                  id='identity'
+                  type='text'
+                />
+              </div>
               <div className="w-[100%] flex justify-end lg:pr-4">
                 <button className="py-[10px] px-[20px] text-white bg-teal-800 font-body cursor-pointer rounded-sm" onClick = {handleClick}>Send</button>
               </div>

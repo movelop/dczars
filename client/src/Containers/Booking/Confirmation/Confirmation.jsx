@@ -50,6 +50,10 @@ const Confirmation = () => {
                   <h3>{confirmation.phone}</h3>
                 </div>
                 <div className='confirmDetail'>
+                  <h3>ID Number:</h3>
+                  <h3>{confirmation.identity}</h3>
+                </div>
+                <div className='confirmDetail'>
                   <h3>Check-in Date:</h3>
                   <h3>
                     {new Date(confirmation.startDate).toLocaleString("en-uk", {
