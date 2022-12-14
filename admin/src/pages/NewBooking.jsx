@@ -135,7 +135,7 @@ const NewBooking = () => {
   }
 
   const handleOpen = () => {
-      setOpen(true);
+      setOpen((prev) =>!prev);
   }
 
   const  handleClick = async(e) => {
