@@ -164,7 +164,7 @@ const EditRoom = ({ item, setEdit }) => {
                   value ={room}
                   onChange={(e) => setRoom(e.target.value)}
                   placeholder="Enter room number and Add"
-                  type='number'
+                  type='text'
                 />
 
                 <button type = 'button' className = 'ml-2 mt-1 w-[22%] py-[10px] px-[15px] border-1 border-color text-white bg-blue-700 self-center outline-none rounded-sm' onClick={handleAddRoom}>Add</button>

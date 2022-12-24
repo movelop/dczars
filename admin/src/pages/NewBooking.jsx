@@ -14,7 +14,6 @@ import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
 const newEndDate = new Date();
 newEndDate.setDate(newEndDate.getDate() + 1);
-newEndDate.setHours(12, 59, 0, 0);
 
 
 const NewBooking = () => {
@@ -59,32 +58,34 @@ const NewBooking = () => {
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
-  
+
     const date = new Date(start.getTime());
-  
+
     const dates = [];
-  
+
     while (date <= end) {
-      // Set the time of the date to 1pm
-      const dateAt1pm = new Date(date).setHours(13, 0, 0, 0);
-      dates.push(new Date(dateAt1pm).getTime());
+      dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
-  
+
     return dates;
-  };
-  
-  const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+};
 
-  const isAvailable = (roomNumber) => {
-    const isFound = roomNumber.unavailableDates.some((date) =>
-      alldates.includes(new Date(date).getTime())
-    );
+const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
-    return !isFound;
-  };
+const isAvailable = (roomNumber) => {
+  const endTime = new Date(dates[0].endDate).getTime();
+  const startTime = new Date(dates[0].startDate).getTime();
+  const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
+  const isFound = roomNumber.unavailableDates.some((date) => {
+    const unavailableTime = new Date(date).getTime();
+    return (unavailableTime >= startTime && unavailableTime < endTime) ||
+           (unavailableTime >= endTime && unavailableTime < endDateAfternoon);
+  });
+  return !isFound;
+}
 
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 36;
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   const dayDifference = (date1, date2) => {
       const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
       const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
