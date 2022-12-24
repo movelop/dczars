@@ -69,6 +69,14 @@
     padding: 1rem 0;
 }
 
+.alert {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 14px;
+    color: #af2d2d;
+}
+
 .confirmButton {
     margin-top: 1rem;
 }
@@ -116,6 +124,10 @@
 
     .confirm > .confirmDetail h3 {
         font-size: 32px;
+    }
+
+    .alert  {
+        font-size: 24px;
     }
 
     .cButton {
@@ -168,6 +180,11 @@
         width: 60%;
     }
 
+    .alert {
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
     .cButton {
         width: 100px;
     }
@@ -207,6 +224,10 @@
     }
 
     .confirm > .confirmDetail h3 {
+        font-size: 12px;
+    }
+
+    .alert {
         font-size: 12px;
     }
 

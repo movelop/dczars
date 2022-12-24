@@ -21,28 +21,29 @@ const Checkout = () => {
         firstname: "",
         lastname: "",
         email: "",
-        confirmEmail: "",
         phone: "",
         identity: "",
     });
     const location = useLocation();
     const navigate = useNavigate();
-    const { dates, options, days, totalPrice, reservationPrice, room } = location.state;
+    const { dates, options, days, totalPrice, room } = location.state;
     const getDatesInRange = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
-    
+      
         const date = new Date(start.getTime());
-    
+      
         const dates = [];
-    
+      
         while (date <= end) {
-          dates.push(new Date(date).getTime());
+          // Set the time of the date to 1pm
+          const dateAt1pm = new Date(date).setHours(13, 0, 0, 0);
+          dates.push(new Date(dateAt1pm).getTime());
           date.setDate(date.getDate() + 1);
         }
-    
+      
         return dates;
-    };
+      };
 
     const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
@@ -85,14 +86,14 @@ const Checkout = () => {
               return setError(true);
             }
         }
-      
-        if (isNaN(Number(formData.phone))) {
-            setMsg("Phone number must only contain numbers");
+
+        if(formData.identity.length < 9){
+            setMsg("Please enter a valid identity");
             return setError(true);
         }
       
-        if (formData.email !== formData.confirmEmail) {
-            setMsg("Emails must match");
+        if (isNaN(Number(formData.phone))) {
+            setMsg("Phone number must only contain numbers");
             return setError(true);
         }
       
@@ -114,14 +115,14 @@ const Checkout = () => {
         const newBooking = {
             ...formData,
             roomTitle: room.title,
-            adults: options.adult,
+            adults: options.adults,
             children: options.children,
             startDate: dates[0].startDate,
             endDate: dates[0].endDate,
             numberOfRooms: options.rooms,
             selectedRooms: selectedRooms,
             roomNumbers: selectedRoomNumbers,
-            price: reservationPrice,
+            price: totalPrice,
             paymentReference: reference,
         }
         setLoading(true);
@@ -210,9 +211,9 @@ const Checkout = () => {
                                     <div>
                                         <h4>Guest(s)</h4>
                                         <span>
-                                            {options.adult} Adults{" "}
+                                            {options.adults} Adult(s){" "}
                                             {options.children > 0 &&
-                                            `${options.children} Children`}
+                                            `, ${options.children} Children`}
                                         </span>
                                     </div>
                                     <div>
@@ -225,6 +226,9 @@ const Checkout = () => {
                                     </div>
                                 </>
                             )}
+                            <div className="alert">
+                                ⚠ Damage to any hotel's property will be charged to the occupant of the room.
+                            </div>
                         </div>
                         <div className="guestDetails">
                             <h1>Enter Your Information</h1>
@@ -258,16 +262,6 @@ const Checkout = () => {
                                         required
                                         className='guestDetailsInput'
                                         name='email'
-                                    />
-                                </div>
-                                <div className="guestFormInput">
-                                    <label>Confirm Email</label>
-                                    <input 
-                                        type="email"
-                                        onChange={handleChange}
-                                        required
-                                        className='guestDetailsInput'
-                                        name='confirmEmail'
                                     />
                                 </div>
                                 <div className="guestFormInput">

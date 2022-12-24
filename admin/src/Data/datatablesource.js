@@ -100,10 +100,35 @@ export const bookingColumns = [
     field: "confirmation", headerName: "Confirmation", width: 200,
   },
   {
-    field: "lastname", headerName: "Last Name", width: 100,
+    field: "lastname", headerName: "Last Name", width: 130,
   },
   {
-    field: "email", headerName: "Email", width: 230,
+    field: "startDate", headerName: "Check-In", width: 100,
+    renderCell: (params) => {
+      return (
+        <div className="flex items-center"> 
+          <span>{new Date(params.row.startDate).toLocaleString('en-uk', {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })}</span>
+        </div>
+      )
+    }
+  },
+  {
+    field: "endDate", headerName: "Check-Out", width: 100,
+    renderCell: (params) => {
+      return (
+        <div className="flex items-center"> 
+          <span>{new Date(params.row.endDate).toLocaleString('en-uk', {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })}</span>
+        </div>
+      )
+    }
   },
   {
     field: "phone", headerName: "Phone", width: 150,
@@ -113,6 +138,13 @@ export const bookingColumns = [
   },
   {
     field: "price", headerName: "Price", width: 150,
+    renderCell: (params) => {
+      return (
+        <div className="flex items-center">
+          <span className="capitalize">{params.row.price > 0? params.row.price : "Complimentry"}</span>
+        </div>
+      );
+    },
   }, 
   {
     field: "paymentReference", headerName: "Payment Reference", width: 200,

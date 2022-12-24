@@ -18,6 +18,17 @@ const HeadingSearch = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const handleDateRangeChange = (item) => {
+        // Set the time of the end date to 1pm
+        const endDateAt1pm = new Date(item.selection.endDate).setHours(13, 0, 0, 0);
+        const modifiedSelection = {
+          startDate: item.selection.startDate,
+          endDate: new Date(endDateAt1pm),
+          key: "selection",
+        };
+        setSearchDates([modifiedSelection]);
+    };
+
     const handlesearchOptions = (name, operation) => {
         setSearchOptions((prev) => {
         return {
@@ -34,6 +45,8 @@ const HeadingSearch = () => {
         search( searchDates, searchOptions);
         
     }
+
+    console.log(searchDates[0].endDate);
     
     return (
         <div className="headerSearchContainer">
@@ -44,12 +57,12 @@ const HeadingSearch = () => {
                 </span>
                 {openDate && (
                     <div className="date" onMouseLeave={() => setOpenDate(false)}>
-                        <DateRange
-                        editableDateInputs={true}
-                        onChange={(item) => setSearchDates([item.selection])}
-                        moveRangeOnFirstSelection={false}
-                        ranges={searchDates}
-                        minDate={new Date()}
+                         <DateRange
+                            editableDateInputs={true}
+                            onChange={handleDateRangeChange}
+                            moveRangeOnFirstSelection={false}
+                            ranges={searchDates}
+                            minDate={new Date()}
                         />
                     </div>
                 )}
@@ -57,7 +70,7 @@ const HeadingSearch = () => {
             <div className="headerSearchItem">
                 <BsFillPersonFill className='headerIcon' />
                 <span className="headerSearchText" onClick={() => setOpensearchOptions(!opensearchOptions)}>
-                {`${searchOptions.adult} adult · ${searchOptions.children} children · ${searchOptions.rooms} room`}
+                {`${searchOptions.adults} adult · ${searchOptions.children} children · ${searchOptions.rooms} room`}
                 </span>
                 {opensearchOptions && (
                     <div className="searchOptions" onMouseLeave={() => setOpensearchOptions(false)}>
@@ -65,14 +78,14 @@ const HeadingSearch = () => {
                             <span className="optionText">Adult</span>
                             <div className="optionCounter">
                                 <button
-                                    disabled={searchOptions.adult <= 1}
+                                    disabled={searchOptions.adults <= 1}
                                     className="optionCounterButton"
                                     onClick={() => handlesearchOptions('adult', 'decrement')}
                                 >
                                     -
                                 </button>
                                 <span className="optionCounterNumber">
-                                    {searchOptions.adult}
+                                    {searchOptions.adults}
                                 </span>
                                 <button
                                     className="optionCounterButton"

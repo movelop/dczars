@@ -48,6 +48,14 @@
     align-items: center;
 }
 
+.alert {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 14px;
+    color: #af2d2d;
+}
+
 .guestDetails {
     margin: 3rem auto;
     max-width: 1024px;
@@ -210,6 +218,10 @@
         font-size: 26px;
     }
 
+    .alert  {
+        font-size: 24px;
+    }
+
     .guestDetails {
         max-width: 1580px;
     }
@@ -309,6 +321,11 @@
         max-width: 780px;
     }
 
+    .alert {
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
     .guestDetails {
         max-width: 780px;
     }
@@ -352,6 +369,10 @@
 
     .checkoutRoomInfo > div > span {
         font-size: 13px;
+    }
+
+    .alert {
+        font-size: 12px;
     }
 
     .guestFormInput {

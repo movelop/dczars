@@ -27,7 +27,7 @@ const Home = () => {
                     telephone, luggage storage, tables and armchairs, refrigerators plus in-room sofas.
                   </p>
                   <Link to="/rooms">
-                    <button className='exploreButton'>Explore</button>
+                    <button className='exploreButton'>Explore our rooms</button>
                   </Link>
                 </div>
                 <div className='line' />
@@ -51,7 +51,7 @@ const Home = () => {
                     If you are planning to arrive after 10 PM please contact the property in advance using the information on the booking confirmationContainer.
                   </p>
                   <Link to="/facilities">
-                    <button className='exploreButton'>Explore</button>
+                    <button className='exploreButton'>Explore our facilities</button>
                   </Link>
                 </div>
                 <div className='line'  />

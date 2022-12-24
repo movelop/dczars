@@ -1,23 +1,32 @@
 import { createContext, useReducer, useEffect } from 'react';
-const initialDate = JSON.parse(localStorage.getItem('dates'))
-const newDate = new Date();
-const newEndDate = new Date().getTime() + 86400000;
+const initialDate = JSON.parse(localStorage.getItem('dates'));
+const newEndDate = new Date();
+newEndDate.setDate(newEndDate.getDate() + 1);
+newEndDate.setHours(12, 59, 0, 0);
 const INITIAL_STATE = {
-    dates: initialDate ? [
-        {
-            startDate: new Date(initialDate[0]?.startDate) > newDate ? new Date(initialDate[0]?.startDate) : newDate ,
-            endDate: new Date(initialDate[0]?.endDate) > newDate ? new Date(initialDate[0]?.endDate) : newEndDate,
-            key: 'selection'
-        }
-    ] : [
-        {
-            startDate: newDate,
+    dates: initialDate
+      ? [
+          {
+            startDate:
+              new Date(initialDate[0]?.startDate) > new Date()
+                ? new Date(initialDate[0]?.startDate)
+                : new Date(),
+            endDate:
+              new Date(initialDate[0]?.endDate) > new Date()
+                ? new Date(initialDate[0]?.endDate)
+                : new Date(newEndDate),
+            key: "selection",
+          },
+        ]
+      : [
+          {
+            startDate: new Date(),
             endDate: new Date(newEndDate),
-            key: 'selection'
-        }
-    ],
+            key: "selection",
+          },
+        ],
     options: JSON.parse(localStorage.getItem('options')) || {
-        adult: 1,
+        adults: 1,
         children: 0,
         rooms: 1,
     },

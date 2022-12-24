@@ -12,15 +12,17 @@ import { Box, Checkbox, FormControlLabel, TextField, Typography } from '@mui/mat
 
 import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
-const newDate = new Date();
-const newEndDate = new Date().getTime() + 86400000;
+const newEndDate = new Date();
+newEndDate.setDate(newEndDate.getDate() + 1);
+newEndDate.setHours(12, 59, 0, 0);
+
 
 const NewBooking = () => {
   const [info, setInfo] = useState({});
   const [dates,setDates] = useState(
       [
           {
-              startDate: newDate,
+              startDate: new Date(),
               endDate: new Date(newEndDate),
               key: 'selection'
           }
@@ -55,32 +57,34 @@ const NewBooking = () => {
   
   
   const getDatesInRange = (startDate, endDate) => {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+    const start = new Date(startDate);
+    const end = new Date(endDate);
   
-      const date = new Date(start.getTime());
+    const date = new Date(start.getTime());
   
-      const dates = [];
+    const dates = [];
   
-      while (date <= end) {
-        dates.push(new Date(date).getTime());
-        date.setDate(date.getDate() + 1);
-      }
+    while (date <= end) {
+      // Set the time of the date to 1pm
+      const dateAt1pm = new Date(date).setHours(13, 0, 0, 0);
+      dates.push(new Date(dateAt1pm).getTime());
+      date.setDate(date.getDate() + 1);
+    }
   
-      return dates;
+    return dates;
   };
-
+  
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
   const isAvailable = (roomNumber) => {
-      const isFound = roomNumber.unavailableDates.some((date) =>
-        alldates.includes(new Date(date).getTime())
-      );
-  
-      return !isFound;
+    const isFound = roomNumber.unavailableDates.some((date) =>
+      alldates.includes(new Date(date).getTime())
+    );
+
+    return !isFound;
   };
 
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 36;
   const dayDifference = (date1, date2) => {
       const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
       const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
@@ -138,11 +142,22 @@ const NewBooking = () => {
       setOpen((prev) =>!prev);
   }
 
+  const handleDateRangeChange = (item) => {
+    // Set the time of the end date to 1pm
+    const endDateAt1pm = new Date(item.selection.endDate).setHours(12, 59, 0, 0);
+    const modifiedSelection = {
+      startDate: item.selection.startDate,
+      endDate: new Date(endDateAt1pm),
+      key: "selection",
+    };
+    setDates([modifiedSelection]);
+  };
+
   const  handleClick = async(e) => {
       e.preventDefault();
 
       for (let val in info) {
-          if (info[val] === "") {
+          if (info[val] === "" && !info.email ) {
             setMsg("You must Fill Out Every Field");
             return setError(true);
           }
@@ -150,11 +165,6 @@ const NewBooking = () => {
     
       if (isNaN(Number(info.phone))) {
           setMsg("Phone number must only contain numbers");
-          return setError(true);
-      }
-    
-      if (info.email !== info.confirmEmail) {
-          setMsg("Emails must match");
           return setError(true);
       }
     
@@ -178,7 +188,7 @@ const NewBooking = () => {
           numberOfRooms: options.rooms,
           selectedRooms: selectedRooms,
           roomNumbers: selectedRoomNumbers,
-          price: totalPrice,
+          price: info.amount? info.amount : totalPrice,
       }
 
       try {
@@ -197,6 +207,9 @@ const NewBooking = () => {
           setError(true);
       }
   }
+
+  console.log(dates[0].endDate);
+  console.log(alldates);
   return (
     <div className="m-2 md:m-10 mt-24 p-[20px] md:p-10 bg-white rounded-3xl">
       <Toaster />
@@ -278,13 +291,13 @@ const NewBooking = () => {
                 </div>
                 {open && (
                     <div className="absolute top-[5px] xs: md:scale-100 md:top-[50px] z-20 scale-75" onMouseLeave={() => setOpen(false)}>
-                        <DateRange
+                      <DateRange
                         editableDateInputs={true}
-                        onChange={(item) => setDates([item.selection])}
+                        onChange={handleDateRangeChange}
                         moveRangeOnFirstSelection={false}
                         ranges={dates}
                         minDate={new Date()}
-                        />
+                      />
                     </div>
                 )}
               </div>
@@ -303,7 +316,7 @@ const NewBooking = () => {
                           >
                               <RemoveIcon sx={{ fontSize: { lg: '24px', xs: '14px' } }} />
                           </div>
-                          <span className='px-[1rem]'>{options.adults}</span>
+                          <span className='px-[0.5rem] lg:px-[1rem]'>{options.adults}</span>
                           <div
                             className="flex items-center justify-center border-1 outline-none p-1.5 lg:p-2 border-gray-300"
                             name="adults"
@@ -325,7 +338,7 @@ const NewBooking = () => {
                       >
                           <RemoveIcon sx={{ fontSize: { lg: '24px', xs: '14px' } }} />
                       </div>
-                      <span className='px-[1rem]'>{options.children}</span>
+                      <span className='px-[0.5rem] lg:px-[1rem]'>{options.children}</span>
                       <div
                         className="flex items-center justify-center border-1 outline-none p-1.5 lg:p-2 border-gray-300"
                         name="children"
@@ -349,7 +362,7 @@ const NewBooking = () => {
                         >
                             <RemoveIcon  sx={{ fontSize: { lg: '24px', xs: '14px' } }}/>
                         </div>  
-                        <span className='px-[1rem]'>{options.rooms}</span>
+                        <span className='px-[0.5rem] lg:px-[1rem]'>{options.rooms}</span>
                         <div
                           className="flex items-center justify-center border-1 outline-none p-1.5 lg:p-2 border-gray-300"
                           name="adults"
@@ -405,17 +418,6 @@ const NewBooking = () => {
                 />
               </div>
               ))} 
-              <div className="lg:w-[45%] w-full mt-4 mb-4 md:mt-2 md:mb-2">
-              <TextField
-                  onChange={handleChange}
-                  className="w-full"
-                  placeholder='ID number(NIN, Passport Number, etc.)'
-                  label='Identification'
-                  variant="outlined"
-                  id='identity'
-                  type='text'
-                />
-              </div>
               <div className="w-[100%] flex justify-end lg:pr-4">
                 <button className="py-[10px] px-[20px] text-white bg-teal-800 font-body cursor-pointer rounded-sm" onClick = {handleClick}>Send</button>
               </div>

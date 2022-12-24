@@ -73,12 +73,15 @@ const Confirmation = () => {
                     })}
                   </h3>
                 </div>
+                <div className="alert">
+                  ⚠ Damage to any hotel's property will be charged to the occupant of the room.
+                </div> 
                 <div className="confirmButton">
                   <button className="cButton" onClick={() => window.print()}>
                     <BsPrinterFill /> Print
                   </button>
                 </div>
-              </div>
+              </div> 
             </>
             ) : (
               <h1>Something went wrong...</h1>

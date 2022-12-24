@@ -23,7 +23,7 @@ const Contact = () => {
               <div className="contactAddress">
                 <h2>D'Czars Bus Stop, Ilo Awela Road, Toll Gate, Ota, Ogun State.</h2>
                 <div className="contactInfo">
-                  <p>Phone: +234 805 789 1111</p>
+                  <p>Phone: 08057891111, 08039886484, 08167495769, 08140266486</p>
                   <p>Email: dczarshotel@yahoo.com</p>
                 </div>
               </div>

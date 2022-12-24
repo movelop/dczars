@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState} from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { AiOutlineWarning } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 import './Availability.css';
@@ -54,7 +53,7 @@ const Availability = ({ room }) => {
       isAvailable()
     }, [room, dates])
 
-    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 36;
     const dayDifference = (date1, date2) => {
         const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
         const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
@@ -62,11 +61,10 @@ const Availability = ({ room }) => {
     }
 
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
-  const reservationPrice = days * options.rooms * room.price;
-  const totalPrice = (days* options.rooms * room.price) + 5000
+  const totalPrice = days * options.rooms * room.price;
 
   const handleBooking = (room) => {
-    navigate('/booking/checkout', { state: { dates, options, days,reservationPrice, totalPrice, room } });
+    navigate('/booking/checkout', { state: { dates, options, days, totalPrice, room } });
   }
 
 
@@ -78,7 +76,7 @@ const Availability = ({ room }) => {
                     <img src={room.images[0]} alt="room" />
                 </div>
                 <div className="availabilityCardInfo">
-                    <h2>{room.title} <span className='mobi'>(₦{room.price.toLocaleString("en-US")})</span></h2>
+                    <h2>{room.title}</h2>
                     <span className="location">
                         <HiLocationMarker /> D'Czars Hotel and suites, Ota
                     </span>
@@ -100,20 +98,16 @@ const Availability = ({ room }) => {
                             <p>{availableRooms.length}</p>
                         </div>
                     </div>
-                    <div className="alert">
-                        <AiOutlineWarning /> 
-                        <span>All resrevation include ₦5,000 refundable caution fee!</span>
-                    </div>
                 </div>
                 <div className="availabilityCardPrice">
                     <div className='daily'>
                         <label>Daily Price</label>
                         <h6><span><TbCurrencyNaira /></span>{room.price.toLocaleString("en-US")}</h6>
                     </div>
-                    <div>
+                    {/* <div>
                         <label>{`${days} Night(s) for ${options.rooms} room(s)`}</label>
                         <h6><span><TbCurrencyNaira /></span>{reservationPrice.toLocaleString("en-US")}</h6>
-                    </div>
+                    </div> */}
                     <div className='total'>
                         <label>Total</label>
                         <h4 className='last'><span><TbCurrencyNaira /></span>{totalPrice.toLocaleString("en-US")}</h4>

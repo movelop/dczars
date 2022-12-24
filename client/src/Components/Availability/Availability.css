@@ -29,10 +29,6 @@
     margin-bottom: 2px;
 }
 
-.mobi {
-    display: none;
-}
-
 .location {
     color: #435a85;
     font-size: 16px;
@@ -55,25 +51,6 @@
 
 .details > div > label {
     font-weight: bold;
-}
-
-.alert {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    
-}
-
-.alert svg {
-    color: #af2d2d;
-    font-size: 16px;
-}
-
-.alert span {
-    font-size: 14px;
-    color: #af2d2d;
-    display: flex;
-    align-items: center;
 }
 
 .availabilityCardPrice {
@@ -164,14 +141,6 @@
         font-size: 28px;
     }
 
-    .alert svg {
-        font-size: 24px;
-    }
-
-    .alert span {
-        font-size: 22px;
-    }
-
     .availabilityCardPrice > div > label {
         font-size: 28px;
     }
@@ -258,18 +227,6 @@
         font-size: 13px;
     }
 
-    .alert {
-        margin-top: 5px;
-    }
-
-    .alert svg {
-        font-size: 14px;
-    }
-
-    .alert span {
-        font-size: 12px;
-    }
-
     .availabilityCardPrice > div > label {
         font-size: 14px;
     }
@@ -324,20 +281,9 @@
         align-items: center;
         gap: 5px;
     }
-    .mobi {
-        display: block;
-    }
 
     .availabilityCardInfo {
         flex: 100%;
-    }
-
-    .alert svg {
-        font-size: 12px;
-    }
-
-    .alert span {
-        font-size: 11px;
     }
 
     .availabilityCardPrice {
@@ -348,11 +294,6 @@
         flex: 100%;
         text-align: right;
     }
-
-    .daily {
-        display: none;
-    }
-
     .availabilityCardPrice > div > label {
         font-size: 12px;
     }

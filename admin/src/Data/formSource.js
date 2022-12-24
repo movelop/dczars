@@ -112,10 +112,10 @@ export const bookingInputs = [
     placeholder: "john_doe@gmail.com",
   },
   {
-    id:'confirmEmail',
-    label: 'Confirm Email',
-    type:'email',
-    placeholder: 'john_doe@gmail.com',
+    id:'amount',
+    label: 'Amount Recieved',
+    type:'number',
+    placeholder: '₦10,000',
   },
   {
     id: "phone",
