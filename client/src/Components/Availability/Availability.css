@@ -7,11 +7,13 @@
 
 .availabiltyCardImg {
     flex: 30%;
+    height: 200px;
 }
 
 .availabiltyCardImg img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .availabilityCardInfo {
@@ -280,6 +282,10 @@
         display: flex;
         align-items: center;
         gap: 5px;
+    }
+
+    .availabiltyCardImg {
+        height: 120px;
     }
 
     .availabilityCardInfo {
