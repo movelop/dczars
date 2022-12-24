@@ -13,27 +13,16 @@ const Availability = ({ room }) => {
 
     useEffect(() => {
         let a = [];
-        const getDatesInRange = (startDate, endDate) => {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-        
-            const date = new Date(start.getTime());
-        
-            const dates = [];
-        
-            while (date <= end) {
-              dates.push(new Date(date).getTime());
-              date.setDate(date.getDate() + 1);
-            }
-        
-            return dates;
-        };
-    
-        
-        const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
         const isAvailable = () => {
             room?.roomNumbers.forEach((item) => {
-                const isFound = item.unavailableDates.some((date) => alldates.includes(new Date(date).getTime()))
+                const endTime = new Date(dates[0].endDate).getTime();
+                const startTime = new Date(dates[0].startDate).getTime();
+                const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
+                const isFound = item.unavailableDates.some((date) => {
+                    const unavailableTime = new Date(date).getTime();
+                    return (unavailableTime >= startTime && unavailableTime < endTime) ||
+                           (unavailableTime >= endTime && unavailableTime < endDateAfternoon);
+                  });
                 const update = (obj) => {
                     const roomFound = a.includes(obj)
 
