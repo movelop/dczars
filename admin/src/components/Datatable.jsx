@@ -3,7 +3,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BsSearch } from 'react-icons/bs';
 import useFetch from "../hooks/useFetch";
 import { AuthContext } from '../context/AuthContext';
 
