@@ -40,7 +40,6 @@ const BookingTable = ({ columns }) => {
         try {
             await Promise.all(
                 selectedRooms.map((roomId) => {
-                  console.log(roomId);
                   const res = axios.put(`/api/rooms/reservation/${roomId}`, {
                     dates: alldates,
                   });

@@ -12,27 +12,37 @@ import { Box, Checkbox, FormControlLabel, TextField, Typography } from '@mui/mat
 
 import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
-const newEndDate = new Date();
-newEndDate.setDate(newEndDate.getDate() + 1);
+const newDate = new Date();
 
+// Set the time components to 0
+newDate.setHours(0);
+newDate.setMinutes(0);
+newDate.setSeconds(0);
+newDate.setMilliseconds(0);
+
+// Add one day to the date
+newDate.setDate(newDate.getDate() + 1);
+
+// Get the timestamp for the date
+const newEndDate = newDate.getTime();
 
 const NewBooking = () => {
   const [info, setInfo] = useState({});
   const [dates,setDates] = useState(
-      [
-          {
-              startDate: new Date(),
-              endDate: new Date(newEndDate),
-              key: 'selection'
-          }
-      ]
+    [
+        {
+            startDate: new Date(),
+            endDate: new Date(newEndDate),
+            key: 'selection'
+        }
+    ]
   )
   const [options, setOptions] = useState(
-      {
-          adults: 1,
-          children: 0,
-          rooms: 1,
-      }
+    {
+        adults: 1,
+        children: 0,
+        rooms: 1,
+    }
   );
   const [room, setRoom] = useState('');
   const [rooms, setRooms] = useState([]);
@@ -53,8 +63,7 @@ const NewBooking = () => {
       toast.error(msg)
     }
   }, [error, msg]);
-  
-  
+
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -77,6 +86,7 @@ const isAvailable = (roomNumber) => {
   const endTime = new Date(dates[0].endDate).getTime();
   const startTime = new Date(dates[0].startDate).getTime();
   const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
+  console.log(new Date(endDateAfternoon).toUTCString());
   const isFound = roomNumber.unavailableDates.some((date) => {
     const unavailableTime = new Date(date).getTime();
     return (unavailableTime >= startTime && unavailableTime < endTime) ||
@@ -84,75 +94,64 @@ const isAvailable = (roomNumber) => {
   });
   return !isFound;
 }
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+const dayDifference = (date1, date2) => {
+    const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
+    const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return daydiff;
+}
 
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  const dayDifference = (date1, date2) => {
-      const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
-      const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-      return daydiff;
-  }
+const days = dayDifference(dates[0].endDate, dates[0].startDate);
+const totalPrice = days* options.rooms * room?.price || "";
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
-  const totalPrice = days* options.rooms * room?.price || "";
+const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+}
 
-  const handleChange = (e) => {
-      setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  }
+const handleRoom = (e) => {
+    e.preventDefault();
+    const single = rooms.find((item) => item._id === e.target.value);
+    setRoom(single);
+}
 
-  const handleRoom = (e) => {
-      e.preventDefault();
-      const single = rooms.find((item) => item._id === e.target.value);
-      setRoom(single);
-  }
+const updateAdultQuantity = (val) => {
+    if (options.adults === 1 && val === -1) return;
+    if (options.adults === 5 && val === 1) return;
+    setOptions({ ...options, adults: options.adults + val });
+};
 
-  const updateAdultQuantity = (val) => {
-      if (options.adults === 1 && val === -1) return;
-      if (options.adults === 5 && val === 1) return;
-      setOptions({ ...options, adults: options.adults + val });
-  };
+const updateRoomsQuantity = (val) => {
+    if (options.rooms === 1 && val === -1) return;
+    if (options.rooms === 5 && val === 1) return;
+    setOptions({ ...options, rooms: options.rooms + val });
+};
+const updateChildrenQuantity = (val) => {
+    if (options.children === 0 && val === -1) return;
+    if (options.children === 5 && val === 1) return;
+    setOptions({ ...options, children: options.children + val });
+};
 
-  const updateRoomsQuantity = (val) => {
-      if (options.rooms === 1 && val === -1) return;
-      if (options.rooms === 5 && val === 1) return;
-      setOptions({ ...options, rooms: options.rooms + val });
-  };
-  const updateChildrenQuantity = (val) => {
-      if (options.children === 0 && val === -1) return;
-      if (options.children === 5 && val === 1) return;
-      setOptions({ ...options, children: options.children + val });
-  };
+const handleSelect = (e) => {
+    const checked = e.target.checked;
+    const value = e.target.value;
+    const name = e.target.name;
 
-  const handleSelect = (e) => {
-      const checked = e.target.checked;
-      const value = e.target.value;
-      const name = e.target.name;
+    setSelectedRooms(
+      checked
+        ? [...selectedRooms, value]
+        : selectedRooms.filter((item) => item !== value)
+    );
 
-      setSelectedRooms(
-        checked
-          ? [...selectedRooms, value]
-          : selectedRooms.filter((item) => item !== value)
-      );
+    setSelectedRoomNumbers(
+        checked ? [...selectedRoomNumbers, name]
+        : selectedRoomNumbers.filter((item) => item !== name)
+    )
+}
 
-      setSelectedRoomNumbers(
-          checked ? [...selectedRoomNumbers, name]
-          : selectedRoomNumbers.filter((item) => item !== name)
-      )
-  }
+const handleOpen = () => {
+    setOpen(true);
+}
 
-  const handleOpen = () => {
-      setOpen((prev) =>!prev);
-  }
-
-  const handleDateRangeChange = (item) => {
-    // Set the time of the end date to 1pm
-    const endDateAt1pm = new Date(item.selection.endDate).setHours(12, 59, 0, 0);
-    const modifiedSelection = {
-      startDate: item.selection.startDate,
-      endDate: new Date(endDateAt1pm),
-      key: "selection",
-    };
-    setDates([modifiedSelection]);
-  };
 
   const  handleClick = async(e) => {
       e.preventDefault();
@@ -209,8 +208,6 @@ const isAvailable = (roomNumber) => {
       }
   }
 
-  console.log(dates[0].endDate);
-  console.log(alldates);
   return (
     <div className="m-2 md:m-10 mt-24 p-[20px] md:p-10 bg-white rounded-3xl">
       <Toaster />
@@ -294,7 +291,7 @@ const isAvailable = (roomNumber) => {
                     <div className="absolute top-[5px] xs: md:scale-100 md:top-[50px] z-20 scale-75" onMouseLeave={() => setOpen(false)}>
                       <DateRange
                         editableDateInputs={true}
-                        onChange={handleDateRangeChange}
+                        onChange={(item) => setDates([item.selection])}
                         moveRangeOnFirstSelection={false}
                         ranges={dates}
                         minDate={new Date()}

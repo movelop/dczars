@@ -20,10 +20,10 @@ const HeadingSearch = () => {
 
     const handleDateRangeChange = (item) => {
         // Set the time of the end date to 1pm
-        const endDateAt1pm = new Date(item.selection.endDate).setHours(13, 0, 0, 0);
+        // const endDateAt1pm = new Date(item.selection.endDate).setHours(13, 0, 0, 0);
         const modifiedSelection = {
           startDate: item.selection.startDate,
-          endDate: new Date(endDateAt1pm),
+          endDate: item.selection.endDate,
           key: "selection",
         };
         setSearchDates([modifiedSelection]);
@@ -45,8 +45,6 @@ const HeadingSearch = () => {
         search( searchDates, searchOptions);
         
     }
-
-    console.log(searchDates[0].endDate);
     
     return (
         <div className="headerSearchContainer">
