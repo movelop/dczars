@@ -8,30 +8,19 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { Box, Checkbox, FormControlLabel, TextField, Typography } from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 
 import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
 const newDate = new Date();
-
-// Set the time components to 0
-newDate.setHours(0);
-newDate.setMinutes(0);
-newDate.setSeconds(0);
-newDate.setMilliseconds(0);
-
-// Add one day to the date
-newDate.setDate(newDate.getDate() + 1);
-
-// Get the timestamp for the date
-const newEndDate = newDate.getTime();
+const newEndDate = new Date().getTime() + 86400000;
 
 const NewBooking = () => {
   const [info, setInfo] = useState({});
   const [dates,setDates] = useState(
     [
         {
-            startDate: new Date(),
+            startDate: newDate,
             endDate: new Date(newEndDate),
             key: 'selection'
         }
@@ -46,6 +35,7 @@ const NewBooking = () => {
   );
   const [room, setRoom] = useState('');
   const [rooms, setRooms] = useState([]);
+  const [checkedIn, setCheckedIn] = useState(false);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
   const [msg, setMsg] = useState('');
@@ -86,8 +76,10 @@ const isAvailable = (roomNumber) => {
   const endTime = new Date(dates[0].endDate).getTime();
   const startTime = new Date(dates[0].startDate).getTime();
   const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
-  console.log(new Date(endDateAfternoon).toUTCString());
-  const isFound = roomNumber.unavailableDates.some((date) => {
+  const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
+    return new Date(date).toISOString();
+  });
+  const isFound = updatedUnavailableDates.some((date) => {
     const unavailableTime = new Date(date).getTime();
     return (unavailableTime >= startTime && unavailableTime < endTime) ||
            (unavailableTime >= endTime && unavailableTime < endDateAfternoon);
@@ -152,6 +144,10 @@ const handleOpen = () => {
     setOpen(true);
 }
 
+const handleCheckedIn = (e) => {
+  setCheckedIn(e.target.value);
+}
+
 
   const  handleClick = async(e) => {
       e.preventDefault();
@@ -189,6 +185,7 @@ const handleOpen = () => {
           selectedRooms: selectedRooms,
           roomNumbers: selectedRoomNumbers,
           price: info.amount? info.amount : totalPrice,
+          checkedIn,
       }
 
       try {
@@ -207,6 +204,8 @@ const handleOpen = () => {
           setError(true);
       }
   }
+
+  console.log(checkedIn);
 
   return (
     <div className="m-2 md:m-10 mt-24 p-[20px] md:p-10 bg-white rounded-3xl">
@@ -416,6 +415,19 @@ const handleOpen = () => {
                 />
               </div>
               ))} 
+              <div className="lg:w-[45%] w-full mt-4 mb-4 md:mt-2 md:mb-2">
+                <FormControl>
+                  <Typography>Checked In</Typography>
+                  <Select 
+                    id='checkedIn'
+                    value={ checkedIn }
+                    onChange={handleCheckedIn}
+                  >
+                    <MenuItem value={false}>No</MenuItem>
+                    <MenuItem value={true}>Yes</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
               <div className="w-[100%] flex justify-end lg:pr-4">
                 <button className="py-[10px] px-[20px] text-white bg-teal-800 font-body cursor-pointer rounded-sm" onClick = {handleClick}>Send</button>
               </div>

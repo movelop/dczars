@@ -1,38 +1,28 @@
 import { createContext, useReducer, useEffect } from 'react';
 const initialDate = JSON.parse(localStorage.getItem('dates'))
 const newDate = new Date();
-
-// Set the time components to 0
-newDate.setHours(0);
-newDate.setMinutes(0);
-newDate.setSeconds(0);
-newDate.setMilliseconds(0);
-
-// Add one day to the date
-newDate.setDate(newDate.getDate() + 1);
-
-// Get the timestamp for the date
-const newEndDate = newDate.getTime();
+const newEndDate = new Date().getTime() + 86400000;
 const INITIAL_STATE = {
     dates: initialDate ? [
         {
-            startDate: new Date(initialDate[0]?.startDate) > new Date() ? new Date(initialDate[0]?.startDate): new Date() ,
+            startDate: new Date(initialDate[0]?.startDate) > newDate ? new Date(initialDate[0]?.startDate): newDate ,
             endDate: new Date(initialDate[0]?.endDate) ,
             key: 'selection'
         }
     ] : [
         {
-            startDate: new Date(),
+            startDate: newDate,
             endDate: new Date(newEndDate),
             key: 'selection'
         }
     ],
     options: JSON.parse(localStorage.getItem('options')) || {
-        adults: 1,
+        adult: 1,
         children: 0,
         rooms: 1,
     },
 };
+
 
 export const SearchContext = createContext(INITIAL_STATE);
 

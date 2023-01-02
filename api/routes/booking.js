@@ -1,11 +1,12 @@
 import express from 'express';
 
-import { createBooking, deleteBooking, getAllBookings, getBooking, getABooking, getIncome, getLatestBooking, getYearlyIncome, cancelBooking  } from '../controllers/booking.js';
+import { createBooking, deleteBooking, getAllBookings, getBooking, getABooking, getIncome, getLatestBooking, getYearlyIncome, cancelBooking, updateBooking  } from '../controllers/booking.js';
 import { verifyAdmin, verifyPayment } from '../utils/token.js';
 
 const router = express.Router();
 
 router.post('/create', createBooking);
+router.put('/update/:id', updateBooking);
 router.put('/:id', cancelBooking);
 router.delete('/:id', deleteBooking);
 router.get("/", verifyAdmin, getAllBookings);

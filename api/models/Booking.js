@@ -64,6 +64,10 @@ const BookingSchema = new mongoose.Schema({
     identity: {
         type: String,
     },
+    checkedIn: {
+        type: Boolean,
+        default: false,
+    }
 }, { timestamps: true });
 
 export default mongoose.model('Booking', BookingSchema);

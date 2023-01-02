@@ -135,6 +135,10 @@ const SingleDetails = ({ type, data, img }) => {
                         <span className="font-[300]">{data.identity? data.identity : 'NIL'}</span>
                     </div>
                     <div className="mb-[10px] md:text-lg">
+                        <span className="font-bold mr-2">Checked In:</span>
+                        <span className="font-[300]">{data.checkedIn ? 'Yes': "No"}</span>
+                    </div>
+                    <div className="mb-[10px] md:text-lg">
                         <span className="font-bold mr-2">Room Number(s):</span>
                         <span className="font-[300]">{data.roomNumbers.length >1 ? data.roomNumbers.map((roomNumber) => `${roomNumber}, `): data.roomNumbers.map((roomNumber) => `${roomNumber}`)}</span>
                     </div>

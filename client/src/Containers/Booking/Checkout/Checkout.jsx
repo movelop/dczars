@@ -49,13 +49,16 @@ const Checkout = () => {
         const endTime = new Date(dates[0].endDate).getTime();
         const startTime = new Date(dates[0].startDate).getTime();
         const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
-        const isFound = roomNumber.unavailableDates.some((date) => {
+        const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
+          return new Date(date).toISOString();
+        });
+        const isFound = updatedUnavailableDates.some((date) => {
           const unavailableTime = new Date(date).getTime();
           return (unavailableTime >= startTime && unavailableTime < endTime) ||
                  (unavailableTime >= endTime && unavailableTime < endDateAfternoon);
         });
         return !isFound;
-    }
+      }
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

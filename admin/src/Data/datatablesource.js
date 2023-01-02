@@ -137,7 +137,7 @@ export const bookingColumns = [
     field: "roomTitle", headerName: "Room Title", width: 150,
   },
   {
-    field: "price", headerName: "Price", width: 150,
+    field: "price", headerName: "Price", width: 100,
     renderCell: (params) => {
       return (
         <div className="flex items-center">
@@ -147,7 +147,17 @@ export const bookingColumns = [
     },
   }, 
   {
-    field: "paymentReference", headerName: "Payment Reference", width: 200,
+    field: "checkedIn", headerName: "Checked IN", width: 100,
+    renderCell: (params) => {
+      return (
+        <div className="flex items-center">
+          <span className="capitalize">{params.row.checkedIn ? 'Yes' : "No"}</span>
+        </div>
+      );
+    },
+  },
+  {
+    field: "paymentReference", headerName: "Payment Reference", width: 180,
     renderCell: (params) => {
       return (
         <div className="flex items-center">

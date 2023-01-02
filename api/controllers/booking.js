@@ -21,6 +21,7 @@ export const createBooking = async (req, res, next) => {
         price,
         paymentReference,
         identity,
+        checkedIn
     } = data;
     try {
         let bookingId = generateId(12);
@@ -50,6 +51,7 @@ export const createBooking = async (req, res, next) => {
             price,
             paymentReference,
             identity,
+            checkedIn,
             confirmation: bookingId,
         })
         res.status(200).json(result);
@@ -57,6 +59,15 @@ export const createBooking = async (req, res, next) => {
         next(error);
     }
 };
+
+export const updateBooking = async(req, res, next) => {
+    try {
+        const updatedBooking = await Booking.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true });
+        res.status(200).json(updatedBooking);
+    } catch (error) {
+        next(error);
+    }
+}
 
 export const cancelBooking = async (req, res, next) => {
     try {
