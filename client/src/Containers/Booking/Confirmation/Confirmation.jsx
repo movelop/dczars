@@ -75,7 +75,10 @@ const Confirmation = () => {
                 </div>
                 <div className="alert">
                   ⚠ Damage to any hotel's property will be charged to the occupant of the room.
-                </div> 
+                </div>
+                <div className='alert'>Reservation with "Non arrival of guest"
+                  will be forfieted if not cancelled 24hrs prior to arrival
+                </div>
                 <div className="confirmButton">
                   <button className="cButton" onClick={() => window.print()}>
                     <BsPrinterFill /> Print
