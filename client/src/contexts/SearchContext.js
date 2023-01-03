@@ -17,7 +17,7 @@ const INITIAL_STATE = {
         }
     ],
     options: JSON.parse(localStorage.getItem('options')) || {
-        adult: 1,
+        adults: 1,
         children: 0,
         rooms: 1,
     },
