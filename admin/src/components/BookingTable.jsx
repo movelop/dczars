@@ -15,43 +15,45 @@ const BookingTable = ({ columns }) => {
         setList(data);
     }, [data]);
 
-    const handleDelete =  async(params) => {
-        const id = params._id
+    const handleDelete = async (params) => {
+        const id = params._id;
         const selectedRooms = params.selectedRooms;
         const startDate = params.startDate;
         const endDate = params.endDate;
         const getDatesInRange = (startDate, endDate) => {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-        
-            const date = new Date(start.toString());
-        
-            const dates = [];
-        
-            while (date <= end) {
-              dates.push(new Date(date).getTime());
-              date.setDate(date.getDate() + 1);
-            }
-        
-            return dates;
+          const start = new Date(startDate);
+          const end = new Date(endDate);
+      
+          const date = new Date(start.toString());
+      
+          const dates = [];
+      
+          while (date <= end) {
+            dates.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+          }
+      
+          return dates;
         };
         const alldates = getDatesInRange(startDate, endDate);
-    
+      
         try {
-            await Promise.all(
-                selectedRooms.map((roomId) => {
-                  const res = axios.put(`/api/rooms/reservation/${roomId}`, {
-                    dates: alldates,
-                  });
-                  return res.data;
-                })
-            );
-          await axios.delete(`/api/${path}/${id}`);
-          setList(list.filter((item) => item._id !== id));
+          const updates = await Promise.allSettled(
+            selectedRooms.map((roomId) => {
+              return axios.put(`/api/rooms/reservation/${roomId}`, {
+                dates: alldates,
+              });
+            })
+          );
+          if (updates.every((update) => update.status === "fulfilled")) {
+            await axios.delete(`/api/${path}/${id}`);
+            setList(list.filter((item) => item._id !== id));
+          }
         } catch (error) {
-          
+          console.log(error);
         }
-    };
+      };
+      
 
     const handleSearch = (searchTerm) => {
         return data.filter((row) => {
