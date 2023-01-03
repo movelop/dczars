@@ -29,7 +29,7 @@ const BookingTable = ({ columns }) => {
             const dates = [];
         
             while (date <= end) {
-              dates.push(new Date(date));
+              dates.push(new Date(date).getTime());
               date.setDate(date.getDate() + 1);
             }
         

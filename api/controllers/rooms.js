@@ -28,20 +28,20 @@ export const updateRoomAvailability = async (req, res, next) => {
 
 export const cancelRoomReservation = async (req, res, next) => {
     try {
-        await Room.updateOne(
-            {"roomNumbers._id": {$eq: req.params.id}},
-            {
-                $pull: {
-                    "roomNumbers.$.unavailableDates": { $in: [ ...req.body.dates ]},
-                },
-            },
-            { "multi": true }
-        );
-        res.status(200).json("Room Status has been updated");
+      await Room.updateOne(
+        { "roomNumbers._id": { $eq: req.params.id } },
+        {
+          $pullAll: {
+            "roomNumbers.$.unavailableDates": req.body.dates,
+          },
+        },
+        { "multi": true }
+      );
+      res.status(200).json("Room Status has been updated");
     } catch (error) {
-        next(error);
+      next(error);
     }
-};
+  };
 
 export const updateRoom = async (req, res, next) => {
     try {
@@ -69,7 +69,7 @@ export const getRoom = async (req, res, next) => {
 };
 export const getAllRooms = async (req, res, next) => {
     try {
-        const rooms = await Room.find();
+        const rooms = await Room.find().sort({ 'price' : 1});
         res.status(200).json(rooms);
     } catch (error) {
         next(error);
