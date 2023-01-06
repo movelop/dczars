@@ -88,7 +88,7 @@ const isAvailable = (roomNumber) => {
   });
   return !isFound;
 }
-const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 25;
 const dayDifference = (date1, date2) => {
     const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
     const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
