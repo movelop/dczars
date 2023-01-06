@@ -17,7 +17,8 @@ const Availability = ({ room }) => {
             room?.roomNumbers.forEach((item) => {
                 const endTime = new Date(dates[0].endDate).getTime();
                 const startTime = new Date(dates[0].startDate).getTime();
-                const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
+                const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
+                const endDateAfternoon = new Date(endtimeNoon).getTime();
                 const updatedUnavailableDates = item.unavailableDates.map((date) => {
                     return new Date(date).toISOString();
                   });

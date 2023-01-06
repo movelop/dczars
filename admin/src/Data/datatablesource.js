@@ -137,6 +137,16 @@ export const bookingColumns = [
     field: "roomTitle", headerName: "Room Title", width: 150,
   },
   {
+    field: 'roomNumbers', headerName: 'Room Numbers', width: 150,
+    renderCell: (params) => {
+      return(
+        <div className="flex items-center">
+          <span className="capitalize">{params.row.roomNumbers.map((roomNumber, i) => i === params.row.roomNumbers.length - 1 ? roomNumber : `${roomNumber}, ` )}</span>
+        </div>
+      )
+    }
+  },
+  {
     field: "price", headerName: "Price", width: 100,
     renderCell: (params) => {
       return (

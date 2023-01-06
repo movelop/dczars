@@ -78,7 +78,7 @@ const Home = () => {
     getYearlyIncome();
   }, [user])
   
-
+console.log(income);
 
   return (
     <div className='mt-24'>
@@ -144,7 +144,7 @@ const Home = () => {
               <p className="font-semibold text-white text-2xl">Earnings</p>
               <div>
                 <p className="flex items-center text-2xl text-white font-semibold mt-8"><TbCurrencyNaira/>{income[0]?.total.toLocaleString('en-us')}</p>
-                <p className="text-gray-200">{MONTHS[income[0]?._id - 1]} Revenue</p>
+                <p className="text-gray-200">{MONTHS[income[0]?._id.month - 1]} Revenue</p>
               </div>
             </div>
             <div className='mt-4'>

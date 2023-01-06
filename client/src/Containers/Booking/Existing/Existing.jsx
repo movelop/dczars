@@ -34,7 +34,7 @@ const Existing = () => {
     const alldates = getDatesInRange(startDate, endDate);
     const cancelledBooking = {...info, cancelled:true}
     try {
-      await Promise.all(
+      const updates = await Promise.allSettled(
           selectedRooms.map((roomId) => {
             const res = axios.put(`/api/rooms/reservation/${roomId}`, {
               dates: alldates,
@@ -42,8 +42,10 @@ const Existing = () => {
             return res.data;
           })
       );
-      await axios.put(`/api/bookings/${_id}`, cancelledBooking);
-      navigate('/');
+      if (updates.every((update) => update.status === "fulfilled")) {
+        await axios.put(`/api/bookings/${_id}`, cancelledBooking);
+        navigate('/');            
+      }
   } catch (error) {
       console.log(error);
   }

@@ -155,25 +155,28 @@ export const getIncome = async (req, res, next) => {
     
     try {
         const income = await Booking.aggregate([
-          {
-            $match: {
-              createdAt: { $gte: previous5Month }
+            {
+                $match: {
+                  createdAt: {
+                    $lt: new Date(new Date().setDate(32))
+                  }
+                }
             },
-          },
           {
             $project: {
               month: { $month: "$createdAt" },
+              year: { $year: "$createdAt"},
               sales: "$price",
             },
           },
           {
             $group: {
-              _id: "$month",
+              _id: { month: "$month", year: "$year"},
               total: { $sum: "$sales" },
               "count": { "$sum": 1 },
             },
           },
-        ]).sort({ _id: -1 });
+        ]).sort({ "_id.year": -1, "_id.year": -1 });
         res.status(200).json(income);
       } catch (err) {
         res.status(500).json(err);

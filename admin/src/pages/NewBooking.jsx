@@ -13,7 +13,7 @@ import { Box, Checkbox, FormControl, FormControlLabel, MenuItem, Select, TextFie
 import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
 const newDate = new Date();
-const newEndDate = new Date().getTime() + 86400000;
+const newEndDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1, 0, 0, 0);
 
 const NewBooking = () => {
   const [info, setInfo] = useState({});
@@ -75,7 +75,8 @@ const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 const isAvailable = (roomNumber) => {
   const endTime = new Date(dates[0].endDate).getTime();
   const startTime = new Date(dates[0].startDate).getTime();
-  const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
+  const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
+  const endDateAfternoon = new Date(endtimeNoon).getTime();
   const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
     return new Date(date).toISOString();
   });

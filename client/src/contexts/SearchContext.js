@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from 'react';
 const initialDate = JSON.parse(localStorage.getItem('dates'))
 const newDate = new Date();
-const newEndDate = new Date().getTime() + 86400000;
+const newEndDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1, 0, 0, 0);
 const INITIAL_STATE = {
     dates: initialDate ? [
         {

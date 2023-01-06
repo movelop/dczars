@@ -48,7 +48,8 @@ const Checkout = () => {
     const isAvailable = (roomNumber) => {
         const endTime = new Date(dates[0].endDate).getTime();
         const startTime = new Date(dates[0].startDate).getTime();
-        const endDateAfternoon = new Date(endTime + (13 * 60 * 60 * 1000)).getTime();
+        const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
+        const endDateAfternoon = new Date(endtimeNoon).getTime();
         const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
           return new Date(date).toISOString();
         });
