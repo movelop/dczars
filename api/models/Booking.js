@@ -7,14 +7,12 @@ const BookingSchema = new mongoose.Schema({
     },
     lastname: {
         type: String,
-        required: true,
     },
     email: {
         type: String,
     },
     phone: {
         type: String,
-        required: true,
     },
     roomTitle: {
         type: String,
