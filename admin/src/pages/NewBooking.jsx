@@ -12,8 +12,9 @@ import { Box, Checkbox, FormControl, FormControlLabel, MenuItem, Select, TextFie
 
 import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
-const newDate = new Date();
-const newEndDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1, 0, 0, 0);
+const date = new Date().setHours(0,0,0,0);
+const newDate = new Date(date);
+const newEndDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1, 1, 0, 0);
 
 const NewBooking = () => {
   const [info, setInfo] = useState({});
