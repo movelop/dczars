@@ -100,7 +100,14 @@ export const bookingColumns = [
     field: "confirmation", headerName: "Confirmation", width: 200,
   },
   {
-    field: "lastname", headerName: "Last Name", width: 130,
+    field: "lastname", headerName: "Name", width: 130,
+    renderCell: (params) => {
+      return (
+        <div className='flex items-center'>
+          <span>{params.row.lastname? params.row.lastname : params.row.firstname}</span>
+        </div>
+      )
+    }
   },
   {
     field: "startDate", headerName: "Check-In", width: 100,
@@ -168,37 +175,6 @@ export const bookingColumns = [
   },
   {
     field: "paymentReference", headerName: "Payment Reference", width: 180,
-    renderCell: (params) => {
-      return (
-        <div className="flex items-center">
-          <span className="capitalize">{params.row.paymentReference || 'Cash Payment'}</span>
-        </div>
-      );
-    },
-  },
-] 
-
-export const transactionColumns = [
-  {
-    field: "confirmation", headerName: "Confirmation", width: 200,
-  },
-  {
-    field: "lastname", headerName: "Last Name", width: 100,
-  },
-  {
-    field: "email", headerName: "Email", width: 230,
-  },
-  {
-    field: "phone", headerName: "Phone", width: 150,
-  },
-  {
-    field: "roomTitle", headerName: "Room Title", width: 150,
-  },
-  {
-    field: "price", headerName: "Price", width: 150,
-  }, 
-  {
-    field: "paymentReference", headerName: "Payment Reference", width: 200,
     renderCell: (params) => {
       return (
         <div className="flex items-center">

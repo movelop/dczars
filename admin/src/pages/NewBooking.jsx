@@ -152,23 +152,6 @@ const handleCheckedIn = (e) => {
 
   const  handleClick = async(e) => {
       e.preventDefault();
-
-      for (let val in info) {
-          if (info[val] === "" && !info.email ) {
-            setMsg("You must Fill Out Every Field");
-            return setError(true);
-          }
-      }
-    
-      if (isNaN(Number(info.phone))) {
-          setMsg("Phone number must only contain numbers");
-          return setError(true);
-      }
-    
-      if (/.+@.+\..+/.test(info.email) === false) {
-          setMsg("Must be a valid email");
-          return setError(true);
-      }
       
       if(selectedRooms.length > options.rooms || selectedRooms.length < options.rooms) {
           setMsg(`you must select only ${options.rooms} rooms`);
