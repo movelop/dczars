@@ -1,8 +1,8 @@
-import { createContext, useReducer, useEffect } from 'react';
-const initialDate = JSON.parse(localStorage.getItem('dates'))
-const date = new Date().setHours(0,0,0,0);
-const newDate = new Date(date);
-const newEndDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1, 1, 0, 0);
+import { createContext, useReducer, useEffect } from 'react'
+const initialDate = JSON.parse(localStorage.getItem('dates'));
+const newEndDate = new Date().getTime() + 86400000;
+const newDate = new Date();
+  
 const INITIAL_STATE = {
     dates: initialDate ? [
         {

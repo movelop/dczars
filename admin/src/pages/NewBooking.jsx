@@ -12,9 +12,8 @@ import { Box, Checkbox, FormControl, FormControlLabel, MenuItem, Select, TextFie
 
 import { bookingInputs } from '../Data/formSource';
 import useFetch from "../hooks/useFetch";
-const date = new Date().setHours(0,0,0,0);
-const newDate = new Date(date);
-const newEndDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1, 1, 0, 0);
+const newDate = new Date();
+const newEndDate = new Date().getTime() + 86400000;
 
 const NewBooking = () => {
   const [info, setInfo] = useState({});
@@ -79,16 +78,17 @@ const isAvailable = (roomNumber) => {
   const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
   const endDateAfternoon = new Date(endtimeNoon).getTime();
   const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
-    return new Date(date).toISOString();
-  });
-  const isFound = updatedUnavailableDates.some((date) => {
     const unavailableTime = new Date(date).getTime();
-    return (unavailableTime >= startTime && unavailableTime < endTime) ||
-           (unavailableTime >= endTime && unavailableTime < endDateAfternoon);
+    const checkoutTime = new Date(unavailableTime).setHours(12, 59, 59, 0);
+    return checkoutTime;
+  });
+  const isFound = updatedUnavailableDates.some((checkoutTime) => {
+    return (checkoutTime >= startTime && checkoutTime < endTime) ||
+           (checkoutTime >= endTime && checkoutTime < endDateAfternoon);
   });
   return !isFound;
 }
-const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 25;
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 const dayDifference = (date1, date2) => {
     const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
     const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);

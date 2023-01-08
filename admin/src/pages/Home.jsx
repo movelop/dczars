@@ -77,8 +77,6 @@ const Home = () => {
 
     getYearlyIncome();
   }, [user])
-  
-console.log(income);
 
   return (
     <div className='mt-24'>

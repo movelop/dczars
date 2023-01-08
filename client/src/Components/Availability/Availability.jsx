@@ -20,13 +20,14 @@ const Availability = ({ room }) => {
                 const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
                 const endDateAfternoon = new Date(endtimeNoon).getTime();
                 const updatedUnavailableDates = item.unavailableDates.map((date) => {
-                    return new Date(date).toISOString();
-                  });
-                const isFound = updatedUnavailableDates.some((date) => {
-                    const unavailableTime = new Date(date).getTime();
-                    return (unavailableTime >= startTime && unavailableTime < endTime) ||
-                           (unavailableTime >= endTime && unavailableTime < endDateAfternoon);
-                  });
+                const unavailableTime = new Date(date).getTime();
+                const checkoutTime = new Date(unavailableTime).setHours(12, 59, 59, 0);
+                return checkoutTime;
+                });
+                const isFound = updatedUnavailableDates.some((checkoutTime) => {
+                return (checkoutTime >= startTime && checkoutTime < endTime) ||
+                        (checkoutTime >= endTime && checkoutTime < endDateAfternoon);
+                });
                 const update = (obj) => {
                     const roomFound = a.includes(obj)
 
@@ -46,7 +47,7 @@ const Availability = ({ room }) => {
       isAvailable()
     }, [room, dates])
 
-    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 25;
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
     const dayDifference = (date1, date2) => {
         const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
         const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
