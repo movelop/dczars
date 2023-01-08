@@ -42,7 +42,7 @@ const BookingSchema = new mongoose.Schema({
         type: [String]
     },
     roomNumbers: {
-        type: [Number],
+        type: [String],
     },
     price: {
         type: Number, 
