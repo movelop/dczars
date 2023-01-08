@@ -17,16 +17,24 @@ const HeadingSearch = () => {
     const [searchOptions, setSearchOptions] = useState(options);
     const navigate = useNavigate();
     const location = useLocation();
-
+    const currentTime = new Date();
     const handleDateRangeChange = (item) => {
-        // Set the time of the end date to 1pm
-        // const endDateAt1pm = new Date(item.selection.endDate).setHours(13, 0, 0, 0);
-        const modifiedSelection = {
-          startDate: item.selection.startDate,
-          endDate: item.selection.endDate,
-          key: "selection",
-        };
-        setSearchDates([modifiedSelection]);
+        const selectedStartDate = item.selection.startDate;
+        if (selectedStartDate.toDateString() === currentTime.toDateString()) {
+            const modifiedSelection = {
+                startDate: currentTime,
+                endDate: item.selection.endDate,
+                key: "selection",
+              };
+              setSearchDates([modifiedSelection]);
+        } else{
+            const modifiedSelection = {
+                startDate: item.selection.startDate,
+                endDate: item.selection.endDate,
+                key: "selection",
+            };
+            setSearchDates([modifiedSelection]);
+        }
     };
 
     const handlesearchOptions = (name, operation) => {

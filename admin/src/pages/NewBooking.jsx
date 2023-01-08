@@ -43,6 +43,7 @@ const NewBooking = () => {
   const [selectedRoomNumbers, setSelectedRoomNumbers] = useState([]);
   const { data } = useFetch('/api/rooms');
   const navigate = useNavigate();
+  const currentTime = new Date();
 
   useEffect(() => {
     setRooms(data);
@@ -101,6 +102,24 @@ const totalPrice = days* options.rooms * room?.price || "";
 const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
 }
+    const handleDateRangeChange = (item) => {
+        const selectedStartDate = item.selection.startDate;
+        if (selectedStartDate.toDateString() === currentTime.toDateString()) {
+            const modifiedSelection = {
+                startDate: currentTime,
+                endDate: item.selection.endDate,
+                key: "selection",
+              };
+              setDates([modifiedSelection]);
+        } else{
+            const modifiedSelection = {
+                startDate: item.selection.startDate,
+                endDate: item.selection.endDate,
+                key: "selection",
+            };
+            setDates([modifiedSelection]);
+        }
+    };
 
 const handleRoom = (e) => {
     e.preventDefault();
@@ -273,12 +292,12 @@ const handleCheckedIn = (e) => {
                 {open && (
                     <div className="absolute top-[5px] xs: md:scale-100 md:top-[50px] z-20 scale-75" onMouseLeave={() => setOpen(false)}>
                       <DateRange
-                        editableDateInputs={true}
-                        onChange={(item) => setDates([item.selection])}
-                        moveRangeOnFirstSelection={false}
-                        ranges={dates}
-                        minDate={new Date()}
-                      />
+                            editableDateInputs={true}
+                            onChange={handleDateRangeChange}
+                            moveRangeOnFirstSelection={false}
+                            ranges={dates}
+                            minDate={new Date()}
+                        />
                     </div>
                 )}
               </div>
