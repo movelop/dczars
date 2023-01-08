@@ -4,7 +4,7 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -212,7 +212,6 @@ const handleCheckedIn = (e) => {
 
   return (
     <div className="m-2 md:m-10 mt-24 p-[20px] md:p-10 bg-white rounded-3xl">
-      <Toaster />
       <div>
         <h1 className="text-xl md:text-3xl font-extrabold tracking tight mb-[20px] dark:text-gray-400 capitalize">Add New Booking</h1>
         <div className="lg:flex lg:gap-5 ">
