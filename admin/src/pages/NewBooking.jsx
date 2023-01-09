@@ -295,7 +295,6 @@ const handleCheckedIn = (e) => {
                             onChange={handleDateRangeChange}
                             moveRangeOnFirstSelection={false}
                             ranges={dates}
-                            minDate={new Date()}
                         />
                     </div>
                 )}
