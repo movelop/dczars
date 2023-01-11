@@ -131,7 +131,6 @@ const handleCheckedIn = (e) => {
 }
 
 const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-console.log(alldates.map((date) => new Date(date).getTime()));
 
 const isAvailable = (roomNumber) => {
   const endTime = new Date(dates[0].endDate).getTime();
