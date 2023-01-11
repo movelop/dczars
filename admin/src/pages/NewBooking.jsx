@@ -43,7 +43,6 @@ const NewBooking = () => {
   const [selectedRoomNumbers, setSelectedRoomNumbers] = useState([]);
   const { data } = useFetch('/api/rooms');
   const navigate = useNavigate();
-  const currentTime = new Date();
 
   useEffect(() => {
     setRooms(data);
@@ -71,55 +70,17 @@ const NewBooking = () => {
     return dates;
 };
 
-const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-
-const isAvailable = (roomNumber) => {
-  const endTime = new Date(dates[0].endDate).getTime();
-  const startTime = new Date(dates[0].startDate).getTime();
-  const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
-  const endDateAfternoon = new Date(endtimeNoon).getTime();
-  const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
-    const unavailableTime = new Date(date).getTime();
-    const checkoutTime = new Date(unavailableTime).setHours(12, 59, 59, 0);
-    return checkoutTime;
-  });
-  const isFound = updatedUnavailableDates.some((checkoutTime) => {
-    return (checkoutTime >= startTime && checkoutTime < endTime) ||
-           (checkoutTime >= endTime && checkoutTime < endDateAfternoon);
-  });
-  return !isFound;
-}
-const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-const dayDifference = (date1, date2) => {
-    const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
-    const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-    return daydiff;
-}
-
-const days = dayDifference(dates[0].endDate, dates[0].startDate);
-const totalPrice = days* options.rooms * room?.price || "";
-
 const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
 }
     const handleDateRangeChange = (item) => {
-        const selectedStartDate = item.selection.startDate;
-        if (selectedStartDate.toDateString() === currentTime.toDateString()) {
-            const modifiedSelection = {
-                startDate: currentTime,
-                endDate: item.selection.endDate,
-                key: "selection",
-              };
-              setDates([modifiedSelection]);
-        } else{
             const modifiedSelection = {
                 startDate: item.selection.startDate,
                 endDate: item.selection.endDate,
                 key: "selection",
             };
             setDates([modifiedSelection]);
-        }
-    };
+  };
 
 const handleRoom = (e) => {
     e.preventDefault();
@@ -168,6 +129,35 @@ const handleOpen = () => {
 const handleCheckedIn = (e) => {
   setCheckedIn(e.target.value);
 }
+
+const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+console.log(alldates.map((date) => new Date(date).getTime()));
+
+const isAvailable = (roomNumber) => {
+  const endTime = new Date(dates[0].endDate).getTime();
+  const startTime = new Date(dates[0].startDate).getTime();
+  const endtimeNoon = new Date(endTime).setHours(13,0,0,0);
+  const endDateAfternoon = new Date(endtimeNoon).getTime();
+  const updatedUnavailableDates = roomNumber.unavailableDates.map((date) => {
+    const unavailableTime = new Date(date).getTime();
+    const checkoutTime = new Date(unavailableTime).setHours(12, 59, 59, 0);
+    return checkoutTime;
+  });
+  const isFound = updatedUnavailableDates.some((checkoutTime) => {
+    return (checkoutTime >= startTime && checkoutTime < endTime) ||
+           (checkoutTime >= endTime && checkoutTime < endDateAfternoon);
+  });
+  return !isFound;
+}
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+const dayDifference = (date1, date2) => {
+    const timeDiff = Math.abs(new Date(date2).getTime() - new Date(date1).getTime());
+    const daydiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return daydiff;
+}
+
+const days = dayDifference(dates[0].endDate, dates[0].startDate);
+const totalPrice = days* options.rooms * room?.price || "";
 
 
   const  handleClick = async(e) => {
