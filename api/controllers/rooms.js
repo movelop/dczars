@@ -28,20 +28,27 @@ export const updateRoomAvailability = async (req, res, next) => {
 
 export const cancelRoomReservation = async (req, res, next) => {
     try {
-      await Room.updateOne(
-        { "roomNumbers._id": { $eq: req.params.id } },
-        {
-          $pullAll: {
-            "roomNumbers.$.unavailableDates": req.body.dates,
-          },
-        },
-        { "multi": true }
-      );
-      res.status(200).json("Room Status has been updated");
+        // Check if the req.params.id is valid and exist.
+        const room = await Room.findOne({ "roomNumbers._id": req.params.id });
+        if (!room) {
+            return res.status(404).json({ message: "Room not found" });
+        }
+        // Check if the room has the "unavailableDates" field
+        let roomNumber = room.roomNumbers.find(number => number._id == req.params.id);
+        if (!roomNumber.unavailableDates) {
+            return res.status(404).json({ message: "This room doesn't have unavailableDates field" });
+        }
+        // Update the room's unavailableDates field
+        await Room.updateOne(
+            { "roomNumbers._id": req.params.id },
+            { $pull: { "roomNumbers.$.unavailableDates": { $in: req.body.dates } } }
+        );
+        res.status(200).json({ message: "Room Status has been updated" });
     } catch (error) {
-      next(error);
+        next(error);
     }
-  };
+};
+
 
 export const updateRoom = async (req, res, next) => {
     try {

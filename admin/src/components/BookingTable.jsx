@@ -24,12 +24,12 @@ const BookingTable = ({ columns }) => {
           const start = new Date(startDate);
           const end = new Date(endDate);
       
-          const date = new Date(start.toString());
+          const date = new Date(start.getTime());
       
           const dates = [];
       
           while (date <= end) {
-            dates.push(new Date(date));
+            dates.push(new Date(date).getTime());
             date.setDate(date.getDate() + 1);
           }
       
@@ -38,21 +38,20 @@ const BookingTable = ({ columns }) => {
         const alldates = getDatesInRange(startDate, endDate);
       
         try {
-          const updates = await Promise.allSettled(
-            selectedRooms.map((roomId) => {
+          await Promise.all(
+              selectedRooms.map((roomId) => {
               return axios.put(`/api/rooms/reservation/${roomId}`, {
                 dates: alldates,
               });
             })
           );
-          if (updates.every((update) => update.status === "fulfilled")) {
-            await axios.delete(`/api/${path}/${id}`);
-            setList(list.filter((item) => item._id !== id));
-          }
+          await axios.delete(`/api/${path}/${id}`);
+          setList(list.filter((item) => item._id !== id));
         } catch (error) {
           console.log(error);
         }
-      };
+    };
+
       
 
     const handleSearch = (searchTerm) => {
