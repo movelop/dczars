@@ -30,7 +30,7 @@ const TableData = () => {
               <TableCell className="dark:text-gray-200">{row.confirmation}</TableCell>
               <TableCell className="dark:text-gray-200">{row.lastname? `${row.lastname} ${row.firstname}`: `${row.firstname}`}</TableCell>
               <TableCell className="dark:text-gray-200">{row.email? row.email : 'NIL'}</TableCell>
-              <TableCell className="dark:text-gray-200">{row.phone? row.email : 'NIL'}</TableCell>
+              <TableCell className="dark:text-gray-200">{row.phone? row.phone : 'NIL'}</TableCell>
               <TableCell className="dark:text-gray-200">{new Date(row.startDate).toLocaleString("en-uk", {
                 year: "numeric",
                 month: "2-digit",
