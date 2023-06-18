@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataGrid } from "@mui/x-data-grid";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "../hooks/api";
 import useFetch from "../hooks/useFetch";
@@ -10,6 +10,7 @@ const BookingTable = ({ columns }) => {
     const location = useLocation();
     const path = location.pathname.split("/")[1];
     const { data, loading } = useFetch(`/api/${path}`);
+    const navigate = useNavigate();
     
     useEffect(() => {
         setList(data);
@@ -52,7 +53,62 @@ const BookingTable = ({ columns }) => {
         }
     };
 
-      
+    const handleCheckout = async(params) => {
+        const id = params._id;
+        const selectedRooms = params.selectedRooms;
+        const startDate = params.startDate;
+        const endDate = params.endDate;
+        const getDatesInRange = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+    
+        const date = new Date(start.getTime());
+    
+        const dates = [];
+    
+        while (date <= end) {
+        dates.push(new Date(date).getTime());
+        date.setDate(date.getDate() + 1);
+        }
+    
+        return dates;
+        };
+        const alldates = getDatesInRange(startDate, endDate);
+        let checkedOut = true
+        const newBooking = {
+            ...params,
+            checkedOut,
+        }
+        try {
+            await Promise.all(
+                selectedRooms.map((roomId) => {
+                    return axios.put(`/api/rooms/reservation/${roomId}`, {
+                      dates: alldates,
+                    });
+                })
+            );
+            await axios.put(`/api/bookings/${id}`, newBooking)
+            navigate(0)
+        } catch (error) {
+            console.log();
+        }
+      }
+
+      const handleCheckin = async(params) => {
+        const id = params._id;
+        let checkedIn = true
+        try {
+            const newBooking = {
+                ...params,
+                checkedIn
+            }
+            await axios.put(`/api/bookings/${id}`, newBooking)
+            navigate(0)
+        }catch (error){
+            console.log(error);
+        }
+      }
+    
 
     const handleSearch = (searchTerm) => {
         return data.filter((row) => {
@@ -69,9 +125,40 @@ const BookingTable = ({ columns }) => {
 
     const actionColumn = [
         {
+            field: 'status',
+            headerName: 'Status',
+            width: 150,
+            renderCell: (params) => {
+                return(
+                    <div className="flex items-center gap-3">
+                       {params.row.checkedIn && !params.row.checkedOut && ( <div
+                            className="py-1 px-2 text-red-700 border-1 border-dotted border-red-800 cursor-pointer"
+                            onClick={() => handleCheckout(params.row)}
+                        >
+                            Check Out
+                        </div>
+                        )}
+                        {!params.row.checkedIn && !params.row.checkedOut && ( <div
+                            className="py-1 px-2 text-green-700 border-1 border-dotted border-green-800 cursor-pointer"
+                            onClick={() => handleCheckin(params.row)}
+                        >
+                            Check In
+                        </div>
+                        )}
+                        {params.row.checkedIn && params.row.checkedOut && ( <div
+                            className="py-1 px-2 text-red-700 cursor-pointer"
+                        >
+                            Checked Out
+                        </div>
+                        )}
+                    </div>
+                )
+            }
+        },
+        {
             field: "action",
             headerName: "Action",
-            width: 200,
+            width: 150,
             renderCell: (params) => {
                 return (
                     <div className="flex items-center gap-3">

@@ -163,16 +163,16 @@ export const bookingColumns = [
       );
     },
   }, 
-  {
-    field: "checkedIn", headerName: "Checked IN", width: 100,
-    renderCell: (params) => {
-      return (
-        <div className="flex items-center">
-          <span className="capitalize">{params.row.checkedIn ? 'Yes' : "No"}</span>
-        </div>
-      );
-    },
-  },
+  // {
+  //   field: "checkedIn", headerName: "Checked IN", width: 100,
+  //   renderCell: (params) => {
+  //     return (
+  //       <div className="flex items-center">
+  //         <span className="capitalize">{params.row.checkedIn ? 'Yes' : "No"}</span>
+  //       </div>
+  //     );
+  //   },
+  // },
   {
     field: "paymentReference", headerName: "Payment Reference", width: 180,
     renderCell: (params) => {
